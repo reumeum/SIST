@@ -13,6 +13,8 @@ public class OperatorMain04 {
 		 * [출력 예시]
 		 * 학생 한 명이 가지는 연필 수 : 17
 		 * 남은 연필 수 : 24
+		 * 
+		 * -> 완료
 		 */
 		
 		int pencilPerStudent = 534 / 30;
