@@ -17,8 +17,11 @@ public class OperatorMain04 {
 		 * -> 완료
 		 */
 		
-		int pencilPerStudent = 534 / 30;
-		int pencilsLeft = 534 % 30;
+		int pencils = 534;
+		int students = 30;
+		
+		int pencilPerStudent = pencils / students;
+		int pencilsLeft = pencils % students;
 		
 		System.out.println("학생 한 명이 가지는 연필 수 : " + pencilPerStudent);
 		System.out.println("남은 연필 수 : " + pencilsLeft);
