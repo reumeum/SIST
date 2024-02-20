@@ -22,8 +22,16 @@ public class OperatorMain14 {
 		System.out.print("상품명 입력: ");
 		String item = input.nextLine();
 		
-		System.out.println();
+		System.out.print("단가 입력: ");
+		int price = input.nextInt();
+		
+		System.out.print("판매 수량 입력: ");
+		int n = input.nextInt();
 		
 		input.close();
+		
+		int totalPrice = (int) (price * n * 0.85);
+		
+		System.out.printf("%s %d대의 가격은 %,d원입니다.%n", item, n, totalPrice);
 	}
 }
