@@ -13,7 +13,7 @@ public class IfMain07 {
 		// 현재 날짜 정보
 		int nowYear = 2024;
 		int nowMonth = 2;
-		int nowDate = 20;
+		int nowDate = 21;
 
 		Scanner input = new Scanner(System.in);
 		System.out.print("출생 연도 입력: ");
@@ -29,7 +29,10 @@ public class IfMain07 {
 		} else {
 			age = nowYear - birthYear - 1;
 		}
-
+		
 		System.out.println("만 나이는 " + age);
+		
+		input.close();
+		
 	}
 }
