@@ -13,5 +13,13 @@ public class ForMain02 {
 			System.out.print(i + "\t");
 		}
 		
+		System.out.println();
+		System.out.println("================");
+		
+		for (int i = 0; i <= 10; i++) {
+			if (i % 2 == 0) {
+				System.out.print(i + "\t");
+			}
+		}
 	}
 }
