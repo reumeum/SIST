@@ -112,14 +112,16 @@ public class CoffeeMain {
 				System.out.printf("거스름돈: %,d원%n", change);
 				System.out.println("맛 좋은 커피가 준비되었습니다.");
 
-//				// 현재 자판기 정보 출력
-//				System.out.println();
-//				System.out.println("====현재 자판기 정보====");
-//				System.out.printf("커피 보유량 : %d%n", coffeeLeft);
-//				System.out.printf("프림 보유량 : %d%n", creamLeft);
-//				System.out.printf("설탕 보유량 : %d%n", sugarLeft);
-//				System.out.printf("자판기 보유 동전 금액 : %,d원%n", coin);
-//				System.out.printf("투입한 동전 금액 : %,d원%n", amount);
+				// 현재 자판기 정보 출력
+				System.out.println();
+				System.out.println("====현재 자판기 정보====");
+				System.out.printf("커피 보유량 : %d%n", coffeeLeft);
+				System.out.printf("프림 보유량 : %d%n", creamLeft);
+				System.out.printf("설탕 보유량 : %d%n", sugarLeft);
+				System.out.printf("자판기 보유 동전 금액 : %,d원%n", coin);
+				System.out.printf("투입한 동전 금액 : %,d원%n", amount);
+				System.out.println("========================");
+				System.out.println();
 
 			} else if (menu == 2) {
 				System.out.println("커피 주문을 종료합니다.");
@@ -129,16 +131,6 @@ public class CoffeeMain {
 				continue;
 			}
 		}
-
-		// 현재 자판기 정보 출력
-		System.out.println();
-		System.out.println("======현재 자판기 정보======");
-		System.out.printf("커피 보유량 : %d%n", coffeeLeft);
-		System.out.printf("프림 보유량 : %d%n", creamLeft);
-		System.out.printf("설탕 보유량 : %d%n", sugarLeft);
-		System.out.printf("자판기 보유 동전 금액 : %,d원%n", coin);
-		System.out.printf("투입한 동전 금액 : %,d원%n", amount);
-		System.out.println("============================");
 
 		input.close();
 	}
