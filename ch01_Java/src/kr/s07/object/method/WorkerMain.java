@@ -49,5 +49,6 @@ public class WorkerMain {
 		System.out.println("직원 이름: " + w1.name);
 		System.out.printf("남은 급여: %,d원%n", w1.money);
 		System.out.printf("계좌 잔고: %,d원%n", w1.balance);
+		
 	}
 }

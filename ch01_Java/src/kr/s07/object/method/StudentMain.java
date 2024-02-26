@@ -86,6 +86,8 @@ public class StudentMain {
 		//		System.out.println("등급 : " + student2.makeGrade());
 
 		student2.printAll();
+		
+		
 
 	}
 }

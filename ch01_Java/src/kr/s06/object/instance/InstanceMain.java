@@ -8,6 +8,7 @@ public class InstanceMain {
 	String var2; // 멤버 변수
 	
 	
+	
 	// 생성자, 생략 가능하며 생략하면 컴파일 시 자동 생성
 	public InstanceMain() {}
 	

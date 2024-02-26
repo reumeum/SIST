@@ -43,6 +43,7 @@ public class MethodMain02 {
 		System.out.println("signOf(x)는 " + sign + "입니다.");
 		
 		input.close();
+		
 	}
 
 }

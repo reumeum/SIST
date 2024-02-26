@@ -52,5 +52,6 @@ public class MethodMain04 {
 		System.out.println("가장 무게가 적게 나가는 사람의 몸무게는 " + min + "kg입니다.");
 
 		input.close();
+		
 	}
 }

@@ -50,5 +50,6 @@ public class MethodMain03 {
 		System.out.println("모든 요소의 합은 " + sum + "입니다.");
 		
 		input.close();
+		
 	}
 }

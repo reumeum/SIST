@@ -71,6 +71,7 @@ public class BankMain {
 				break;
 			} else {   // 잘못 입력
 				System.out.println("잘못 입력했습니다.");
+			
 			}
 		}
 

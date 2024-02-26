@@ -20,5 +20,6 @@ public class MethodMain01 {
 		System.out.println("result = " + result);
 		
 		method.print("오늘은 월요일");
+		
 	}
 }
