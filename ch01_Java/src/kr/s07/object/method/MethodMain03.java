@@ -34,17 +34,21 @@ public class MethodMain03 {
 		System.out.print("요소 수: ");
 		int n = input.nextInt();
 		
-		int[] arr = new int[n];
+		// n개의 요소를 가지는 배열
+		int[] x = new int[n];
 		
 		for (int i = 0; i < n; i++) {
 			System.out.print("x[" + i + "]= ");
-			arr[i] = input.nextInt();
+			x[i] = input.nextInt();
 		}
 		
+		// 객체 선언 및 생성
 		MethodMain03 m = new MethodMain03();
 		
-		int sum = m.sumOf(arr);
+		int sum = m.sumOf(x);
 		
 		System.out.println("모든 요소의 합은 " + sum + "입니다.");
+		
+		input.close();
 	}
 }
