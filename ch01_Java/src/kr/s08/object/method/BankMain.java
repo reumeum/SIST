@@ -11,13 +11,23 @@ class Account {
 	// 멤버 메서드
 	// 예금하기
 	public void deposit(int money) {
-		balance += money;
+		if (money > 0) {
+			balance += money;
+			System.out.println("입금이 완료되었습니다.");
+		} else {
+			System.out.println("입금액은 0보다 크게 입력하세요.");
+		}
 	}
 
 	// 출금하기
 	public void withdraw(int money) {
-		if (balance >= money) {
-			balance -= money;			
+		if (money <= 0) {
+			System.out.println("출금액은 0보다 크게 입력하세요.");
+		} else if (balance >= money) {
+			balance -= money;
+			System.out.println("출금이 완료되었습니다.");
+		} else {
+			System.out.println("잔액이 부족합니다.");
 		}
 	}
 
@@ -60,9 +70,6 @@ public class BankMain {
 			} else if (menu == 2) {    // 출금
 				System.out.print("출금할 금액: ");
 				int money = input.nextInt();
-				if (account.balance < money) {
-					System.out.println("잔고가 부족합니다.");
-				}
 				account.withdraw(money);
 			} else if (menu == 3) {    // 잔고 확인
 				account.printAccount();
@@ -71,7 +78,7 @@ public class BankMain {
 				break;
 			} else {   // 잘못 입력
 				System.out.println("잘못 입력했습니다.");
-			
+
 			}
 		}
 
