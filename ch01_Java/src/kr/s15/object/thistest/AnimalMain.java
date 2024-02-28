@@ -16,23 +16,29 @@ public class AnimalMain {
 	 * 이름, 나이, 비행여부를 출력, 비행여부 true/false -> 가능/불가능
 	 */
 
-	
 	public static void main(String[] args) {
 		Animal a1 = new Animal("독수리", 5, true);
-		
+
 		System.out.println("이름: " + a1.getName());
 		System.out.println("나이: " + a1.getAge());
-		System.out.println("비행 여부: " + (a1.isFly() ? "가능" : "불가능"));
-		
+//		System.out.println("비행 여부: " + (a1.isFly() ? "가능" : "불가능"));
+		System.out.println("비행 여부: " + printFly(a1.isFly()));
+
 		System.out.println();
-		
+
 		Animal a2 = new Animal();
 		a2.setName("사자");
 		a2.setAge(8);
 		a2.setFly(false);
-		
+
 		System.out.println("이름: " + a2.getName());
 		System.out.println("나이: " + a2.getAge());
-		System.out.println("비행 여부: " + (a2.isFly() ? "가능" : "불가능"));
+//		System.out.println("비행 여부: " + (a2.isFly() ? "가능" : "불가능"));
+		System.out.println("비행 여부: " + printFly(a2.isFly()));
+	}
+
+	// AnimalMain 에서만 작업하기 위해 private 메서드로 설정
+	private static String printFly(boolean fly) {
+		return fly ? "가능" : "불가능";
 	}
 }
