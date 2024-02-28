@@ -8,11 +8,11 @@ public class Score {
 	private int math;
 
 	// 생성자
-	public Score(String n, int k, int e, int m) {
-		name = n;
-		korean = k;
-		english = e;
-		math = m;
+	public Score(String name, int korean, int english, int math) {
+		this.name = name;
+		this.korean  = korean;
+		this.english = english;
+		this.math = math;
 	}
 
 	// 총점 구하기

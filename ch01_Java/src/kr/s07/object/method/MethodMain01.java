@@ -9,6 +9,7 @@ public class MethodMain01 {
 	// 반환하는 데이터가 없는 경우
 	public void print(String str) {
 		System.out.println(str);
+		
 	}
 
 	public static void main(String[] args) {

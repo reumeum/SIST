@@ -11,6 +11,8 @@ public class OverloadingMain02 {
 		getLength(s);
 	}
 	public void getLength(String s) {
+		
+		
 		System.out.println(s + "의 길이: " + s.length());
 	}
 	
