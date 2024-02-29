@@ -24,6 +24,7 @@ public class Student {
 		science = s;
 		num = 5;
 	}
+	
 
 	// 총점 구하기
 	public int getTotal() {

@@ -14,6 +14,7 @@ public class LocalVariable {
 		System.out.println("지역 변수 a : " + a);
 		System.out.println("멤버 변수 b : " + b);
 	}
+	
 
 	public void fun() {
 		// a는 make() 메서드에서 선언한 지역 변수이기 때문에
