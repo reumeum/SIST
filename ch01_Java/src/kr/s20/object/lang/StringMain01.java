@@ -27,6 +27,7 @@ public class StringMain01 {
 		String str3 = new String("Hello");
 		String str4 = new String("Hello");
 		
+		
 		// 객체 비교
 		if (str3 == str4) {
 			System.out.println("str3과 str4는 같은 객체");
