@@ -1,9 +1,5 @@
 package kr.s26.exception;
 
-import java.security.cert.CertPathBuilderException;
-
-import javax.naming.PartialResultException;
-
 public class ExceptionMain03 {
 	public static void main(String[] args) {
 		int var = 50;
