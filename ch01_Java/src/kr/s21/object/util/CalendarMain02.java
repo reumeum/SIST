@@ -3,7 +3,7 @@ package kr.s21.object.util;
 import java.util.Calendar;
 import java.util.Scanner;
 
-public class CalendarMain03 {
+public class CalendarMain02 {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		// 현재 날짜와 시간을 구함

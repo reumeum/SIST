@@ -5,7 +5,7 @@ import java.util.Random;
 public class MathMain02 {
 	public static void main(String[] args) {
 		String[] gift = {"스마트폰", "TV", "냉장고", "꽝"};
-					    	//  0     1       2       3
+					    //  0       1       2     3
 		  
 		//난수 발생 : 0 ~ 1미만의 실수
 		double ran = Math.random();
