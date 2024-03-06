@@ -11,7 +11,7 @@ public class ExceptionMain01 {
 			/*
 			 * 예외가 발생하고 프로그램이 멈춤
 			 * 예외가 발생하면 예외 정보를 담고 있는 예외 객체가 생성되고 예외 문구가 콘솔에 출력됨
-			 */
+			 */ 
 			System.out.println("array[" + i + "]: " + array[i]);
 		}
 		System.out.println("프로그램 끝!!");
