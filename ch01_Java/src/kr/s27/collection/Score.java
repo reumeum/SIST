@@ -6,10 +6,6 @@ public class Score {
 	private int english;
 	private int math;
 
-	public String getName() {
-		return name;
-	}
-
 	// 총점 구하기 int makeSum()
 	public int makeSum() {
 		return korean + english + math;
@@ -45,6 +41,10 @@ public class Score {
 	}
 
 	//get/set 메서드 정의
+	public String getName() {
+		return name;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}

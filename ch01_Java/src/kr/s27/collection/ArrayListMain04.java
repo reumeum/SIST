@@ -46,18 +46,19 @@ public class ArrayListMain04 {
 
 		// 요소의 삭제
 		// list2.remove(2); // 인덱스
+		// list2.remove((Integer) 40);
 		list2.remove(Integer.valueOf(40)); // 요소, int -> Integer
-		
+
 		for (int i = 0; i < list2.size(); i++) {
 			System.out.println(i + " : " + list2.get(i));
 		}
 
 		System.out.println("---------------------------");
-		
+
 		// 요소의 변경
-		         // 인덱스, 데이터
+		// 인덱스, 데이터
 		list2.set(1, 30);
-		
+
 		for (int i = 0; i < list2.size(); i++) {
 			System.out.println(i + " : " + list2.get(i));
 		}

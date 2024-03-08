@@ -13,6 +13,7 @@ public class HashSetMain01 {
 			hs.add(n); //중복 불허
 		}
 		
+		
 		//저장된 요소의 목록
 		System.out.println(hs);
 		System.out.println("-------------------------");
