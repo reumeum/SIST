@@ -9,6 +9,7 @@ public class HashMapMain02 {
 		String[] msg = {"Berlin", "Paris", "Seoul", "New York", "London"};
 		
 		HashMap<Integer, String> map = new HashMap<Integer, String>();
+		
 		for (int i = 0; i < msg.length; i++) {
 			map.put(i, msg[i]);
 		}

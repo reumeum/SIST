@@ -125,6 +125,7 @@ public class MovieMain {
 			for (Movie m : list) {
 				fw.write(m.toString());
 			}
+			System.out.println("파일이 성공적으로 생성되었습니다.");
 			fw.flush();
 		} catch (IOException e) {
 			System.out.println("파일에 영화 정보 저장 오류");

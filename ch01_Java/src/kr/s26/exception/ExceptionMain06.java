@@ -13,7 +13,6 @@ public class ExceptionMain06 {
 
 	public void printData() throws IOException, NumberFormatException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("단 입력: ");
 
 		// String -> int
 		int dan = Integer.parseInt(br.readLine()); // readline()은 한 라인에 입력한 데이터를 String으로 반환
@@ -26,13 +25,16 @@ public class ExceptionMain06 {
 
 	public static void main(String[] args) {
 		ExceptionMain06 em = new ExceptionMain06();
-		try {
-			em.printData();
-
-		} catch (IOException e) {
-			System.out.println("입력시 오류 발생");
-		} catch (NumberFormatException e) {
-			System.out.println("숫자를 입력하세요");
+		while (true) {
+			try {
+				System.out.print("단 입력: ");
+				em.printData();
+				break;
+			} catch (IOException e) {
+				System.out.println("입력시 오류 발생");
+			} catch (NumberFormatException e) {
+				System.out.println("숫자를 입력하세요");
+			}
 		}
 	}
 
