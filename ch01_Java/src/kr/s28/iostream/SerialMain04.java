@@ -11,12 +11,13 @@ public class SerialMain04 {
 		ObjectInputStream ois = null;
 
 		try {
-			//파일 읽기
+			// 파일 읽기
 			fis = new FileInputStream("userInfo.ser");
 			ois = new ObjectInputStream(fis);
-			//역직렬화
+			// 역직렬화
 			ArrayList<UserInfo> list = (ArrayList<UserInfo>) ois.readObject();
 			System.out.println(list);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
