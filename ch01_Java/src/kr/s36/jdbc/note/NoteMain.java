@@ -19,7 +19,7 @@ public class NoteMain {
 			e.printStackTrace();
 		} finally {
 			if (br != null) try {br.close();} catch (IOException e) {}
-		}
+		} 
 	}
 	
 	//메뉴

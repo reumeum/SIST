@@ -52,8 +52,8 @@ public class UpdateMain {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (br != null) try {br.close();} catch (IOException e) {}
 			DBUtil.executeClose(null, pstmt, conn);
+			if (br != null) try {br.close();} catch (IOException e) {}
 		}
 	}
 }
