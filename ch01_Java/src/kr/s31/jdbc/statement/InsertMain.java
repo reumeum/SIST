@@ -24,7 +24,7 @@ public class InsertMain {
 			conn = DriverManager.getConnection(db_url, db_id, db_password);
 			
 			//SQL문 작성
-			sql = "INSERT INTO test1(id, age) VALUES('bluemoon', 25)";
+			sql = "INSERT INTO test1(id, age) VALUES('she''g', 30)";
 			
 			//JDBC 수행 3단계: Statement 객체 생성
 			stmt = conn.createStatement();

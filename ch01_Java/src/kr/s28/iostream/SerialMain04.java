@@ -1,6 +1,7 @@
 package kr.s28.iostream;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class SerialMain04 {
 			ArrayList<UserInfo> list = (ArrayList<UserInfo>) ois.readObject();
 			System.out.println(list);
 
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
