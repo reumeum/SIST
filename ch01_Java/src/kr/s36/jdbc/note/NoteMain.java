@@ -46,11 +46,36 @@ public class NoteMain {
 					note.selectInfo();
 					
 				} else if (no == 3) { //상세글 보기
+					note.selectInfo(); //글번호 먼저 확인하기
+					System.out.print("선택한 글의 번호: ");
+					int num = Integer.parseInt(br.readLine());
+					note.selectDetailInfo(num);
 					
 				} else if (no == 4) { //글수정
+					note.selectInfo();
+					System.out.print("수정할 글의 번호: ");
+					int num = Integer.parseInt(br.readLine());
+					note.selectDetailInfo(num);
+					
+					System.out.print("이름: ");
+					String name = br.readLine();
+					System.out.print("비밀번호: ");
+					String passwd = br.readLine();
+					System.out.print("제목: ");
+					String subject = br.readLine();
+					System.out.print("내용: ");
+					String content = br.readLine();
+					System.out.print("이메일: ");
+					String email = br.readLine();
+					
+					note.updateInfo(num, name, passwd, subject, content, email);
 					
 				} else if (no == 5) { //글삭제
-					
+					note.selectInfo();
+					System.out.print("삭제할 글의 번호: ");
+					int num = Integer.parseInt(br.readLine());
+					note.deleteInfo(num);
+		
 				} else if (no == 6) {
 					System.out.println("프로그램을 종료합니다.");
 					break;
