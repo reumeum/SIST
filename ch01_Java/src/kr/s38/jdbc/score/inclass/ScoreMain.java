@@ -1,8 +1,8 @@
-package kr.s38.jdbc.score;
+package kr.s38.jdbc.score.inclass;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.IOException;
 
 public class ScoreMain {
 	private BufferedReader br;
@@ -17,6 +17,7 @@ public class ScoreMain {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			//자원정리
 			if (br != null)
 				try {
 					br.close();
@@ -24,30 +25,26 @@ public class ScoreMain {
 				}
 		}
 	}
-	
 
 	//메뉴
 	public void callMenu() throws IOException {
 		while (true) {
-			System.out.print("1.입력, 2.목록, 3.상세정보, 4.수정, 5.삭제 6.종료> ");
+			System.out.print("1.입력,2.목록,3.상세정보,4.수정,5.삭제,6.종료>");
 			try {
 				int no = Integer.parseInt(br.readLine());
-
-				if (no == 1) { //입력
-					System.out.print("이름: ");
+				if (no == 1) {//입력
+					System.out.print("이름:");
 					String name = br.readLine();
+					int korean = parseInputData("국어:");
+					int english = parseInputData("영어:");
+					int math = parseInputData("수학:");
 
-					int korean = checkScore("국어");
-					int english = checkScore("영어");
-					int math = checkScore("수학");
-
-					int sum = getSum(korean, english, math);
-					int avg = getAvg(sum);
-					String grade = getGrade(avg);
+					int sum = makeSum(korean, english, math);
+					int avg = makeAvg(sum);
+					String grade = makeGrade(avg);
 
 					dao.insertScore(name, korean, english, math, sum, avg, grade);
-
-				} else if (no == 2) { //목록
+				} else if (no == 2) {//목록
 					dao.selectScore();
 				} else if (no == 3) { //상세정보
 					dao.selectScore();
@@ -66,13 +63,13 @@ public class ScoreMain {
 					System.out.print("이름: ");
 					String name = br.readLine();
 
-					int korean = checkScore("국어");
-					int english = checkScore("영어");
-					int math = checkScore("수학");
+					int korean = parseInputData("국어");
+					int english = parseInputData("영어");
+					int math = parseInputData("수학");
 
-					int sum = getSum(korean, english, math);
-					int avg = getAvg(sum);
-					String grade = getGrade(avg);
+					int sum = makeSum(korean, english, math);
+					int avg = makeAvg(sum);
+					String grade = makeGrade(avg);
 
 					dao.updateScore(num, name, korean, english, math, sum, avg, grade);
 
@@ -82,57 +79,65 @@ public class ScoreMain {
 					int num = Integer.parseInt(br.readLine());
 
 					dao.deleteScore(num);
-
-				} else if (no == 6) { //종료
-					System.out.println("프로그램을 종료합니다.");
+				} else if (no == 6) {//종료
+					System.out.println("프로그램 종료!!");
 					break;
 				} else {
-					System.out.println("메뉴를 잘못 입력했습니다.");
+					System.out.println("잘못 입력했습니다.");
 				}
-
 			} catch (NumberFormatException e) {
 				System.out.println("숫자만 입력 가능");
 			}
 		}
 	}
 
-	private int getSum(int korean, int english, int math) {
+	//총점 구하기
+	public int makeSum(int korean, int english, int math) {
 		return korean + english + math;
 	}
 
-	private int getAvg(int sum) {
+	//평균 구하기
+	public int makeAvg(int sum) {
 		return sum / 3;
 	}
 
-	private String getGrade(int avg) {
-		if (avg >= 90) {
-			return "A";
-		} else if (avg >= 80) {
-			return "B";
-		} else if (avg >= 70) {
-			return "C";
-		} else if (avg >= 60) {
-			return "D";
-		} else {
-			return "E";
+	//등급 구하기
+	public String makeGrade(int avg) {
+		String grade;
+		switch (avg / 10) {
+		case 10:
+		case 9:
+			grade = "A";
+			break;
+		case 8:
+			grade = "B";
+			break;
+		case 7:
+			grade = "C";
+			break;
+		case 6:
+			grade = "D";
+			break;
+		default:
+			grade = "F";
 		}
+		return grade;
 	}
 
-	private int checkScore(String courseName) throws IOException {
-		int score;
-
+	//성적 범위 체크(0~100)
+	public int parseInputData(String course) throws IOException {
 		while (true) {
+			System.out.print(course);
 			try {
-				System.out.print(courseName + ": ");
-				score = Integer.parseInt(br.readLine());
-
-				if (score < 0 || score > 100) {
-					System.out.println("성적은 0~100 사이로 입력해주세요.");
-					continue;
+				int num = Integer.parseInt(br.readLine());
+				if (num < 0 || num > 100) {
+					throw new ScoreValueException("0부터 100사이만 입력 가능");
 				}
-				return score;
+				return num;
 			} catch (NumberFormatException e) {
 				System.out.println("숫자만 입력 가능");
+			} catch (ScoreValueException e) {
+				System.out.println(e.getMessage());
 			}
 		}
 	}
