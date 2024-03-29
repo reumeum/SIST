@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>영화 홍보 페이지</title>
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Hi+Melody&family=IBM+Plex+Sans+KR&family=Noto+Serif+KR&display=swap');
+
+html {
+	padding: 30px;
+	background: linear-gradient(180deg, rgb(176, 176, 176), rgb(26, 26, 26));
+	font-family: "IBM Plex Sans KR", sans-serif;
+	font-weight: 400;
+}
+
+ul {
+	list-style: none;
+	margin: auto;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	font-weight: 600;
+}
+
+#menu li {
+	float: right;
+	width: 60px;
+	font-size: 12px;
+}
+
+#menu a {
+	color: rgb(26, 26, 26);
+}
+
+#title {
+	margin: 30px 0 60px 0;
+	text-align: left;
+	color: rgb(28, 27, 27);
+	text-shadow: 3px 3px rgb(184, 112, 112);
+	font-size: 60px;
+    font-family: "Black Han Sans", sans-serif;
+	font-weight: 400;
+	font-style: italic;
+	white-space: pre-line;
+	line-height: 48px;
+}
+
+.cite p {
+	text-align: center;
+	margin: 80px auto;
+	color: rgb(245, 245, 245);
+	text-shadow: 2px 2px 4px rgb(26, 26, 26);
+	font-size:22px;
+	font-family: "Noto Serif KR", serif;
+  	font-weight: 400;
+}
+
+.img-list li {
+	display: inline-block;
+}
+
+.main-img {
+	width: 330px;
+}
+
+#main {
+	padding: 30px 0;
+	color: rgb(245, 245, 245);
+}
+
+#main li {
+	margin-bottom: 20px;
+}
+
+.description-title {
+	font-size: 28px;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.description {
+	white-space: pre-line;
+	font-size: 12px;
+	margin: 0;
+}
+</style>
+<body>
+	<ul id="menu">
+		<li><a href="../files/poster.webp">Poster</a></li>
+		<li><a href="https://www.youtube.com/watch?v=lwrG3HQXTFw" target="_blank">Trailer</a></li>
+	</ul>
+
+	<div id="title">센과 
+	치히로의 
+	행방불명</div>
+	
+	<div class="cite">
+	<p>"한번 있었던 일은 절대로 잊지 않는단다. 기억해내지 못할 뿐이야."</p>
+	</div>
+	
+	
+	<ul class="img-list">
+		<li><img class="main-img" src="../files/chihiro042.jpg"></li>
+		<li><img class="main-img" src="../files/chihiro045.jpg"></li>
+		<li><img class="main-img" src="../files/chihiro025.jpg"></li>
+	</ul>
+
+	<ul id="main">
+			<li>
+				<div class="description-title">About</div>
+				<p class="description">금지된 세계의 문이 열렸다! 
+				이사 가던 날, 수상한 터널을 지나자 인간에게는 금지된 신들의 세계로 오게 된 치히로.. 
+				신들의 음식을 먹은 치히로의 부모님은 돼지로 변해버린다. 
+				“걱정마, 내가 꼭 구해줄게…” 겁에 질린 치히로에게 다가온 정체불명의 소년 하쿠. 
+				그의 따뜻한 말에 힘을 얻은 치히로는 인간 세계로 돌아가기 위해 사상 초유의 미션을 시작하는데…</p>
+			</li>
+		<li>
+			<div class="description-title">Director</div>
+			<p class="description">미야자키 하야오</p>
+		</li>
+		<li>
+			<div class="description-title">Release</div>
+			<p class="description">2002.06.28</p>
+		</li>
+		<li>
+			<div class="description-title">Running Time</div>
+			<p class="description">126min</p>
+		</li>
+		<li>
+			<div class="description-title">Genre</div>
+			<p class="description">애니메이션, 판타지, 모험, 가족</p>
+		</li>
+	</ul>
+</body>
+</html>
