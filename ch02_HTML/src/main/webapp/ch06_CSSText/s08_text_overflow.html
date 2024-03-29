@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>text-overflow</title>
+<style type="text/css">
+div {
+	width: 100px;
+	border: 1px solid black;
+	white-space: nowrap;
+	/* div를 벗어난 데이터 표시 방법 지정 */
+	overflow: hidden; /* div를 벗어난 데이터를 숨김 */
+	text-overflow: ellipsis;
+	/* 
+	clip이 넘치는 텍스트를 잘라버림(기본값) 
+	ellipsis (말줄임표)
+	*/
+}
+</style>
+</head>
+<body>
+	<div>사용 시기는 크게 1. 등반 완료 시 쌍볼트에 자기확보줄 건 후, 등반자일로 이중 백업하는 경우. 2. 하강
+		전 자일 정리 시 자일을 떨어트리지 않기 위해 백업으로 어딘가에 묶어둘 때. 정도가 있다. 그러니까 빠른 백업의 용도 정도가
+		되겠다. 나의 경우 등강을 위한 픽스로프 설치에는 8자 매듭을 사용한다.</div>
+</body>
+</html>
