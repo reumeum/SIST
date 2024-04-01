@@ -8,11 +8,11 @@ ul {
 	list-style: none;
 }
 
-ul li {
+ul.menu1 li {
 	display: inline;
 }
 
-ul li a {
+ul.menu1 li a {
 	text-decoration: none;
 	background-color: #C00;
 	color: white;
@@ -27,14 +27,70 @@ ul li a {
 	padding-left: 10px;
 }
 
-ul li a:hover {
+ul.menu1 li a:hover {
 	background-color: #336699;
 	text-decoration: none;
 }
+
+ul.menu2 li {
+	display: inline;
+}
+
+ul.menu2 li a {
+	text-decoration: none;
+	background-color: #c00;
+	color: #fff;
+	width: 100px;
+	height: 40px;
+	display: table-cell;
+	text-align: center; /*가로 정렬*/
+	vertical-align: middle; /*세로 정렬*/
+}
+
+ul.menu2 li a:hover {
+	background-color: #336699;
+	text-decoration: none;
+}
+
+ul.menu3 li {
+	float: left; /*왼쪽을 기준으로 가로로 배치*/
+} 
+
+
+ul.menu3 li a {
+	text-decoration: none;
+	background-color: #c00;
+	color: #fff;
+	width: 100px;
+	height: 40px;
+	margin : 2px; /*태그 밖 여백*/
+	display: flex;
+	align-items: center; /*가로 정렬*/
+	justify-content: center; /*세로 정렬*/
+}
+
+ul.menu3 li a:hover {
+	background-color: #336699;
+	text-decoration: none;
+}
+
+
 </style>
 </head>
 <body>
-	<ul>
+	<ul class="menu1">
+		<li><a href="#">Company</a></li>
+		<li><a href="#">Product</a></li>
+		<li><a href="#">Service</a></li>
+		<li><a href="#">Community</a></li>
+	</ul>
+	<ul class="menu2">
+		<li><a href="#">Company</a></li>
+		<li><a href="#">Product</a></li>
+		<li><a href="#">Service</a></li>
+		<li><a href="#">Community</a></li>
+	</ul>
+	<ul class="menu3">
 		<li><a href="#">Company</a></li>
 		<li><a href="#">Product</a></li>
 		<li><a href="#">Service</a></li>
