@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+/*공통*/
+html {
+	padding: 0;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+/*header*/
+header {
+	background-image: url("../files/granada-main.jpg");
+	height: 800px;
+	background-size: cover;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+#auth-nav {
+	display: flex;
+	text-align: center;
+	justify-content: flex-end;
+	font-size: 8pt;
+	margin: 0;
+	padding: 10px 0;
+}
+
+#auth-nav li {
+	margin: 0 15px;
+}
+
+#auth-nav li a {
+	color: #404040;
+}
+
+#auth-nav li a:hover {
+	color: #d47800;
+}
+
+#nav-with-logo {
+	display: flex;
+	text-align: center;
+	justify-content: flex-left;
+}
+
+#logo {
+	margin: 0 20px;
+}
+
+#main-nav {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+#main-nav li a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 84px;
+	height: 28px;
+	margin: 0 16px;
+	font-size: 10pt;
+	color: #2e2e2e;
+	line-height: 12pt;
+}
+
+#main-nav li a:hover {
+	color: #f7f7f7;
+	background-color: #123459;
+	border-radius: 16px;
+}
