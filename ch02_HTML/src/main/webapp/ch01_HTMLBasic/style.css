@@ -1,38 +1,42 @@
 @charset "UTF-8";
 
 /*공통*/
-html {
+* {
+	margin: 0;
 	padding: 0;
 }
 
 ul {
 	list-style: none;
-	padding: 0;
 }
 
 a {
 	text-decoration: none;
 }
 
+body {
+	font-family: "Noto Sans KR", sans-serif;
+	background: #e0e0e0;
+}
+
 /*header*/
 header {
 	background-image: url("../files/granada-main.jpg");
-	height: 800px;
+	height: 920px;
 	background-size: cover;
 }
 
-body {
-	padding: 0;
-	margin: 0;
-}
-
 #auth-nav {
+	height: 50px;
 	display: flex;
 	text-align: center;
 	justify-content: flex-end;
-	font-size: 8pt;
-	margin: 0;
-	padding: 10px 0;
+	font-size: 12pt;
+	display: flex;
+	text-align: center;
+	justify-content: flex-end;
+	font-size: 12pt;
+	padding: 20px 10px;
 }
 
 #auth-nav li {
@@ -51,10 +55,21 @@ body {
 	display: flex;
 	text-align: center;
 	justify-content: flex-left;
+	margin: 0 80px;
 }
 
 #logo {
-	margin: 0 20px;
+	font-family: "Tac One", sans-serif;
+	font-weight: 800;
+	font-size: 48px;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+	line-height: 28px;
+	color: #57432f;
+	text-align: center;
+}
+
+#logo #granada {
+	color: #ba854c
 }
 
 #main-nav {
@@ -68,17 +83,74 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
- 	width: 90px;
+	width: 92px;
 	height: 28px;
-	margin: 0 16px;
-	font-size: 10pt;
+	margin: 0 36px;
+	padding: 4px 16px;
+	font-size: 12pt;
 	color: #2e2e2e;
-	line-height: 12pt;
-	box-shadow: 3px 3px 2px rgba(0,0,0,0.3);
+	line-height: 10pt;
+	font-weight: 500;
+
 }
 
 #main-nav li a:hover {
 	color: #f7f7f7;
-	background-color: #123459;
-	border-radius: 16px;
+	background-color: #344a35;
+	border-radius: 20px;
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+	border: none;
+}
+
+/*main*/
+.main-title {
+	display: block;
+	font-size: 80px;
+	text-align: center;
+	width: 100%;
+	height: 200px;
+	line-height: 170px;
+	font-style: italic;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+	background: #3d3d3d;
+	color: #f7f7f7;
+}
+
+article.item {
+	display: flex;
+}
+
+article.item .item-photo {
+	width: 60%;
+	height: 700px;
+}
+
+article.item .item-photo img {
+	width: 100%;
+	height: 700px;
+	object-fit: cover;
+}
+
+article.item .item-content {
+	width: 40%;
+	padding: 60px 40px;
+}
+
+.item-content .content-title {
+	font-size: 32px;
+	font-weight: 800;
+	color: #5c5c5c;
+	margin-bottom: 50px;
+}
+
+.item-content .item-desc p {
+	margin-bottom: 20px;
+	color: #454545;
+}
+
+footer p {
+	padding: 14px;
+	text-align: center;
+	background-color: #424242;
+	color: #f7f7f7
 }
