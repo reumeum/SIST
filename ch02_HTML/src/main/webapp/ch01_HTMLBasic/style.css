@@ -68,12 +68,13 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 84px;
+ 	width: 90px;
 	height: 28px;
 	margin: 0 16px;
 	font-size: 10pt;
 	color: #2e2e2e;
 	line-height: 12pt;
+	box-shadow: 3px 3px 2px rgba(0,0,0,0.3);
 }
 
 #main-nav li a:hover {
