@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NaN</title>
+  </head>
+  <body>
+    <script>
+      let number1 = 10 / "A"; //NaN(Not a Number)가 출력됨
+      document.write("number1 = " + number1 + "<br>");
+
+      //이런 조건식은 항상 false를 반환하기 때문에 isNaN함수를 사용해야 함
+      if (number1 == NaN) {
+        document.write("숫자가 아님<br>");
+      } else {
+        document.write("숫자임<br>");
+      }
+
+      document.write("---------------------<br>");
+
+      if (isNaN(number1)) {
+        document.write("숫자가 아님<br>");
+      } else {
+        document.write("숫자임");
+      }
+    </script>
+  </body>
+</html>
