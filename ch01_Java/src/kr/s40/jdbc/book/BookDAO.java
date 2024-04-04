@@ -253,12 +253,7 @@ public class BookDAO {
 		try {
 			conn = DBUtil.getConnection();
 			
-			sql = "SELECT bk_num, b.bk_name, b.bk_category, r.re_status, b.bk_regdate FROM sbook b JOIN reservation r USING(bk_num) ORDER BY bk_num DESC";
-			
-			sql문 고치기
-			
-			
-			
+			sql="SELECT bk_num,bk_name,bk_category,NVL2(re_status, '대출중', '대출가능') re_status FROM sbook LEFT OUTER JOIN (SELECT * FROM reservation WHERE re_status=1) USING(bk_num)";
 			
 			
 			pstmt = conn.prepareStatement(sql);
@@ -266,7 +261,7 @@ public class BookDAO {
 			
 			System.out.println("-----------------------------------------------------");
 			if (rs.next()) {
-				System.out.println("번호\t도서명\t\t카테고리\t대출여부\t등록일자");
+				System.out.println("번호\t도서명\t\t카테고리\t대출여부");
 				do {
 					System.out.print(rs.getInt("bk_num"));
 					System.out.print("\t");
@@ -274,12 +269,8 @@ public class BookDAO {
 					System.out.print("\t\t");
 					System.out.print(rs.getString("bk_category"));
 					System.out.print("\t\t");
-					
-					String isAvailable = rs.getInt("re_status") == 0? "대출가능" : "대출중";
-					System.out.print(isAvailable);
-					System.out.print("\t");
-					
-					System.out.println(rs.getDate("bk_regdate"));
+					System.out.println(rs.getString("re_status"));
+	
 				} while (rs.next());
 			} else {
 				System.out.println("등록된 도서가 없습니다.");
