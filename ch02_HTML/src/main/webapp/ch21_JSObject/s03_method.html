@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>객체의 속성과 메서드 사용</title>
+  </head>
+  <body>
+    <script>
+      let name = "장영실";
+      //객체 생성
+      const person = {
+        //속성 지정
+        name: "홍길동",
+        //메서드 지정
+        eat: function (food) {
+          let name = "이순신";
+          //this: 메서드 내에서 자기 자신이 가지고 있는 속성(또는 메서드)를 호출하고 싶을 때는
+          //객체 내부에서 객체를 참조한다는 의미로 this 사용
+          //this.name 형식으로 속성 호출
+          //this.name이 아니라 name을 호출하면 메서드 내에 선언한 지역변수를 찾고 없을 경우 객체 밖에 선언된 변수를 찾음
+          document.write(name + "이 " + food + "을 먹습니다.");
+        },
+      };
+
+      //객체의 속성 호출
+      document.write(person.name + "<br>");
+      //객체의 메서드 호출
+      person.eat("마라탕");
+    </script>
+  </body>
+</html>

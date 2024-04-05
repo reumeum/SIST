@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습</title>
+  </head>
+  <body>
+    <script>
+      /*
+    [실습]
+    정수를 prompt로 5번 입력받아서 배열에 저장하고 저장된 데이터 중 최대값과 최소값을 구해서 출력하시오.    
+    */
+
+      const array = [];
+
+      for (let i = 0; i < 5; i++) {
+        array[i] = Number(prompt("값 " + (i+1) + ": ", ""));
+      }
+
+      let min = array[0];
+      let max = array[0];
+
+      for (let i = 1; i < array.length; i++) {
+        if (array[i] > max) {
+          max = array[i];
+        } else if (array[i] < min) {
+          min = array[i];
+        }
+      }
+
+      document.write("최대값: " + max + "<br>");
+      document.write("최소값: " + min + "<br>");
+    </script>
+  </body>
+</html>

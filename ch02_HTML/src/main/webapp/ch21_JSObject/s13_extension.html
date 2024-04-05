@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상속</title>
+  </head>
+  <body>
+    <script>
+      //부모 생성자 함수
+      function Human(age) {
+        this.age = age;
+      }
+
+      //프로토타입 설정
+      Human.prototype.type = "사람";
+      Human.prototype.getType = function () {
+        return this.type;
+      };
+      Human.prototype.getAge = function () {
+        return this.age;
+      };
+
+      const human = new Human(20);
+      document.write('human.type = ' + human.type + '<br>');
+      document.write('human.age = ' + human.age + '<br>');
+      document.write('human.getType() = ' + human.getType() + '<br>');
+      document.write('human.getAge() = ' + human.getAge() + '<br>');
+      document.write('-----------------------------<br>');
+
+      //자식 생성자 함수
+      function Student(age) {
+        this.age = age;
+      };
+
+      //프로토타입 상속
+      Student.prototype = Human.prototype;
+      Student.prototype.constructor = Student;
+
+      //Human을 상속받는 Student 객체 생성
+      const student = new Student(40);
+      document.write('student.type = ' + student.type + '<br>');
+      document.write('student.age = ' + student.age + '<br>');
+      document.write('student.getType() = ' + student.getType() + '<br>');
+      document.write('student.getAge() = ' + student.getAge() + '<br>');
+    </script>
+  </body>
+</html>

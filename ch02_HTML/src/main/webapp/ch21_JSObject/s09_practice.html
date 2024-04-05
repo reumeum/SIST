@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습</title>
+  </head>
+  <body>
+    <script>
+      /*
+      [실습]
+      이름    수입   지출    세금(5%, getTax)  잔액(getBalance, 세금 공제)
+      홍길동  3000   2500
+      박문수  5000   1100
+      이순신  4000   3600
+      김유신  7000   4200
+      */
+
+      const persons = [];
+
+      persons.push({ 이름: "홍길동", 수입: 3000, 지출: 2500 });
+      persons.push({ 이름: "박문수", 수입: 5000, 지출: 1100 });
+      persons.push({ 이름: "이순신", 수입: 4000, 지출: 3600 });
+      persons.push({ 이름: "김유신", 수입: 7000, 지출: 4200 });
+
+      for (let i in persons) {
+        persons[i].getTax = function () {
+          return this.수입 * 0.05;
+        };
+
+        persons[i].getBalance = function () {
+          return this.수입 - this.지출 - this.getTax();
+        };
+
+        persons[i].toString = function () {
+          return this.이름 + ', ' + this.수입 + ', ' + this.지출 + ', ' + this.getTax() + ', ' + this.getBalance();
+        };
+      }
+
+
+      document.write("이름, 수입, 지출, 세금, 잔액<br>");
+      for (let i in persons) {
+        document.write(persons[i].toString() + '<br>');
+      }
+    </script>
+  </body>
+</html>

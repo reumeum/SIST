@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>객체의 속성 제거</title>
+  </head>
+  <body>
+    <script>
+      const student = {
+        이름: "박문수",
+        나이: 40,
+        직업: "변호사",
+        주소: "서울시",
+      };
+
+      //toString 메서드 지정
+      student.toString = function () {
+        let output = "";
+        for (let key in this) {
+          if (key != "toString") {
+            output += key + ": " + this[key] + "<br>";
+          }
+        }
+
+        return output;
+      };
+
+      //객체의 속성 목록 출력
+      document.write(student.toString() + '<br>');
+
+      //속성 제거
+      delete student.나이;
+      document.write(student.toString() + '<br>');
+      
+    </script>
+  </body>
+</html>
