@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>배열 요소의 정렬</title>
+  </head>
+  <body>
+    <script>
+      const array = ["가", "하", "아", "나"];
+
+      //배열 요소의 목록
+      document.write(array + "<br>");
+
+      array.sort(); //오름차순 정렬
+      document.write(array + "<br>");
+      array.reverse();
+      document.write(array + "<br>");
+
+      document.write("-----------------------<br>");
+
+      const array2 = [52, 273, 103, 32];
+      document.write(array2 + "<br>");
+
+      array2.sort(function (left, right) {
+        return left - right;
+      }); //오름차순 정렬
+      document.write(array2 + "<br>");
+
+      array2.sort(function (left, right) {
+        return right - left;
+      }); //내림차순 정렬
+      document.write(array2 + "<br>");
+    </script>
+  </body>
+</html>
