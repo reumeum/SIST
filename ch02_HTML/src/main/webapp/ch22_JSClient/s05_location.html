@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>loacation</title>
+  </head>
+  <body>
+    <input
+      type="button"
+      value="이동(href)"
+      onclick="location.href='s01_window.html'"
+    />
+    <input
+      type="button"
+      value="이동(assign)"
+      onclick="location.assign('s02_window.html')"
+    />
+    <!--페이지 이동을 할 수 있고 이동시 history 정보가 지워짐-->
+    <input
+      type="button"
+      value="이동(replace)"
+      onclick="location.replace('s02_window.html')"
+    />
+    <!--새로고침-->
+    <input type="button" value="새로고침" onclick="location.reload()" />
+  </body>
+</html>
