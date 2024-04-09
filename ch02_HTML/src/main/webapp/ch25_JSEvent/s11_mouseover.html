@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mouseover, mouseout</title>
+    <script>
+      window.onload = function () {
+        const alink = document.getElementsByTagName("a");
+        const display = document.getElementById("bigImg");
+        for (let i = 0; i < alink.length; i++) {
+          alink[i].onmouseover = function () {
+            display.style.display = "";
+            display.src = this.href;
+            display.width = 500;
+            display.height = 350;
+          };
+
+          alink[i].onmouseout = function () {
+            display.style.display = "none";
+          };
+
+          alink[i].onclick = function () {
+            //a태그의 링크 기능(기본 이벤트) 제거
+            return false;
+          };
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div>
+      <a href="../files/Penguins.jpg"
+        ><img
+          src="../files/Penguins_small.jpg"
+          alt="펭귄 이미지"
+          width="83"
+          height="83"
+      /></a>
+
+      <a href="../files/Koala.jpg"
+        ><img
+          src="../files/Koala_small.jpg"
+          alt="코알라 이미지"
+          width="83"
+          height="83"
+      /></a>
+
+      <div><img id="bigImg" style="display: none" /></div>
+    </div>
+  </body>
+</html>

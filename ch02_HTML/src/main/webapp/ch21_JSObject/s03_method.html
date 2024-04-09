@@ -19,7 +19,7 @@
           //객체 내부에서 객체를 참조한다는 의미로 this 사용
           //this.name 형식으로 속성 호출
           //this.name이 아니라 name을 호출하면 메서드 내에 선언한 지역변수를 찾고 없을 경우 객체 밖에 선언된 변수를 찾음
-          document.write(name + "이 " + food + "을 먹습니다.");
+          document.write(this.name + "이 " + food + "을 먹습니다.");
         },
       };
 

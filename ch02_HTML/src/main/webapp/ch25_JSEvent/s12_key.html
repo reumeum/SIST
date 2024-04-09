@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>key</title>
+    <script>
+      /*
+    이벤트 이름             설명                                            발생 순서
+    keydown                키보드가 눌러질 때 발생                            1
+    keypress               글자가 입력될 때 발생(한글로 사용할 수 없음)        2
+    keyup                  키보드가 떼어질 때(주로 이걸로 한글 처리)           3
+    */
+      window.onload = function () {
+        document.getElementById("content").onkeyup = function () {
+          //입력한 글자수
+          let inputLength = this.value.length;
+          //남은 글자 수를 구함
+          let remain = 150 - inputLength;
+
+          let letter = document.getElementById("letter");
+          letter.textContent = remain;
+
+          if (remain <= 10) {
+            letter.style.color = "red";
+          } else {
+            letter.style.color = "black";
+          }
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <h4 id="letter">150</h4>
+    <textarea
+      rows="5"
+      cols="30"
+      name="content"
+      id="content"
+      maxlength="150"
+    ></textarea>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>querySelectorAll</title>
+  </head>
+  <body>
+    <ul>
+      <li>Apple</li>
+      <li>Banana</li>
+      <li>Orange</li>
+    </ul>
+    <script>
+      //ul요소의 자식 요소인 li 요소를 모두 탐색하여 배열로 반환
+      const fruits = document.querySelectorAll("ul > li");
+
+      for (let i = 0; i < fruits.length; i++) {
+        document.write(fruits[i].innerHTML + "<br>");
+      }
+
+      document.write("--------------------------<br>");
+
+      fruits.forEach(function (element, index, array) {
+        document.write(element.innerHTML + "<br>");
+      });
+    </script>
+  </body>
+</html>
