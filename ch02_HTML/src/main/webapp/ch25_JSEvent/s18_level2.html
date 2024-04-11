@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>표준 이벤트 모델</title>
+  </head>
+  <script>
+    /*
+    DOM Level 2 표준 이벤트 모델
+    addEventListener(eventType, eventHandler, useCapture) //capture는 브라우저에서 지원되지 않음 :이벤트 연결 
+    removeEventListener(eventType, eventHandler) : 이벤트 제거
+    */
+    //윈도우가 로드될 때 매개변수로 전달된 함수를 실행
+    window.addEventListener("load", function () {
+        const header = document.getElementById("header");
+        //이벤트 연결
+        header.addEventListener(
+          "click", function () {
+            alert("이벤트 연결");
+          }, false
+        );
+      }, false
+    );
+  </script>
+  <body>
+    <h1 id="header">Click</h1>
+  </body>
+</html>

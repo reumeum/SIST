@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>클래스 정의</title>
+    <script>
+      //클래스 정의
+      class Person {
+        //생성자
+        constructor(name) {
+          //인스턴스 프로퍼티
+          this.name = name;
+        }
+        //메서드
+        sayHi() {
+          document.write("Hi my name is " + this.name);
+        }
+        //정적 메서드
+        static sayHello() {
+          document.write("Hello!!!!!");
+        }
+      }
+
+      //객체 생성
+      const me = new Person("Annie");
+      document.write(me.name + "<br>");
+      me.sayHi();
+      document.write("<br>");
+      //정적메서드 호출
+      Person.sayHello();
+    </script>
+  </head>
+  <body></body>
+</html>

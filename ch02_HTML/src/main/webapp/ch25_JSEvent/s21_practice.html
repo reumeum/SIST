@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>음식 주문</title>
+    <style>
+      div#order {
+        margin: 0 auto;
+        width: 820px;
+      }
+      table {
+        border-collapse: collapse;
+        border: 1px solid gray;
+      }
+      td,
+      tr {
+        border: 1px solid gray;
+      }
+      td.title {
+        text-align: right;
+        background-color: ivory;
+        font-weight: bold;
+        color: #ff6600;
+        padding: 0 10px;
+      }
+      input[type="number"] {
+        text-align: right;
+        width: 50px;
+        height: 19px;
+      }
+      ul {
+        list-style: none;
+        padding: 0 10px;
+        margin: 5px;
+      }
+      ul li {
+        display: inline;
+      }
+      #totalMoney {
+        text-align: center;
+        border-style: hidden;
+        font-size: 15pt;
+        font-weight: bold;
+        color: maroon;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        //음식 가격 정보가 저장된 객체
+        const product = {
+          c0: 4000,
+          c1: 5000,
+          c2: 6000,
+        };
+        let sum = {
+          c0: 0,
+          c1: 0,
+          c2: 0,
+        };
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const totalMoney = document.getElementById("totalMoney");
+        for (let i = 0; i < checkboxes.length; i++) {
+          checkboxes[i].onclick = function () {
+            const cnt = document.getElementById("num_" + this.id);
+            if (this.checked) {
+              cnt.readonly = "false";
+              cnt.oninput = function () {
+                sum[checkboxes[i].id] = product[checkboxes[i].id] * cnt.value;
+                totalMoney.value =
+                  sum[checkboxes[0].id] +
+                  sum[checkboxes[1].id] +
+                  sum[checkboxes[2].id];
+              };
+            } else {
+              sum[checkboxes[i].id] = 0;
+              totalMoney.value =
+                sum[checkboxes[0].id] +
+                sum[checkboxes[1].id] +
+                sum[checkboxes[2].id];
+            }
+          };
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div id="order">
+      <h2>계산서</h2>
+      <form action="a.jsp" method="post">
+        <table>
+          <tr>
+            <td class="title">식사류</td>
+            <td>
+              <ul>
+                <li>
+                  <input
+                    type="checkbox"
+                    name="foodName"
+                    value="짜장면"
+                    id="c0"
+                    class="order-item"
+                  />
+                  <label for="c0">짜장면(4,000원)</label>
+                  <input
+                    type="number"
+                    name="foodOrderCnt"
+                    id="num_c0"
+                    class="order-item"
+                    min="0"
+                    max="99"
+                    value="0"
+                    readonly="readonly"
+                  />
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    name="foodName"
+                    value="짬뽕"
+                    id="c1"
+                    class="order-item"
+                  />
+                  <label for="c1">짬뽕(5,000원)</label>
+                  <input
+                    type="number"
+                    name="foodOrderCnt"
+                    id="num_c1"
+                    class="order-item"
+                    min="0"
+                    max="99"
+                    value="0"
+                    readonly="readonly"
+                  />
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    name="foodName"
+                    value="볶음밥"
+                    id="c2"
+                    class="order-item"
+                  />
+                  <label for="c2">볶음밥(6,000원)</label>
+                  <input
+                    type="number"
+                    name="foodOrderCnt"
+                    id="num_c2"
+                    class="order-item"
+                    min="0"
+                    max="99"
+                    value="0"
+                    readonly="readonly"
+                  />
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">청구금액</td>
+            <td>
+              <input
+                type="text"
+                id="totalMoney"
+                name="totalMoney"
+                size="15"
+                value="0"
+                readonly="readonly"
+              />원
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <input type="submit" value="주문" /><input
+                type="reset"
+                value="취소"
+              />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>

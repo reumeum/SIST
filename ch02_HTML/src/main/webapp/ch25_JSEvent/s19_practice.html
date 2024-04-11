@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습</title>
+    <script>
+      /*
+        [실습]
+        국어,영어,수학을 입력 받아서 총점, 평균을 구하여 출력
+        [유효성 체크]
+        1.국어,영어,수학 필수 입력
+        2.숫자만 입력
+        3.0~100 값만 입력
+        [출력]
+        국어,영어,수학,총점,평균 출력
+        */
+      function isValid(subject) {
+        if (subject.value.trim() == "") {
+          alert("성적을 입력해주세요.");
+          subject.focus();
+          subject.value = "";
+          return false;
+        }
+
+        if (isNaN(subject.value)) {
+          alert("성적은 숫자만 입력 가능합니다.");
+          subject.focus();
+          subject.value = "";
+          return false;
+        }
+
+        if (subject.value < 0 || subject.value > 100) {
+          alert("성적은 0~100 사이로 입력해주세요.");
+          subject.focus();
+          subject.value = "";
+          return false;
+        }
+
+        return true;
+      }
+
+      window.onload = function () {
+        const korean = document.getElementById("korean");
+        const english = document.getElementById("english");
+        const math = document.getElementById("math");
+
+        const confirm_btn = document.getElementById("confirm_btn");
+
+        confirm_btn.onclick = function () {
+          if (!(isValid(korean) && isValid(english) && isValid(math))) {
+            return;
+          }
+
+          const sum =
+            Number(korean.value) + Number(english.value) + Number(math.value);
+          const avg = sum / 3;
+          document.getElementById("result").textContent =
+            "국어: " +
+            Number(korean.value) +
+            ", 영어: " +
+            Number(english.value) +
+            ", 수학: " +
+            Number(math.value) +
+            ", 총점: " +
+            sum +
+            ", 평균: " +
+            avg;
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <form>
+      국어 <input type="text" id="korean" name="korean" /><br />
+      영어 <input type="text" id="english" name="english" /><br />
+      수학 <input type="text" id="math" name="math" /><br />
+      <input type="button" value="확인" id="confirm_btn" />
+      <div id="result"></div>
+    </form>
+  </body>
+</html>

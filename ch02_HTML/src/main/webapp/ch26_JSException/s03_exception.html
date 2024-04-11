@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>예외처리</title>
+  </head>
+  <body>
+    <script>
+      try {
+        let result = 10 / 0;
+
+        if (!isFinite(result)) {
+          //수를 0으로 나눌 때
+          //예외를 일부러 발생시킴
+          throw "DivideByZeroException";
+        }
+      } catch (exception) {
+        document.write(exception);
+        console.dir(exception);
+      } finally {
+        document.write("<br>오류가 있거나 또는 없어도 반드시 수행");
+      }
+      document.write("<br>프로그램 끝!!!");
+    </script>
+  </body>
+</html>

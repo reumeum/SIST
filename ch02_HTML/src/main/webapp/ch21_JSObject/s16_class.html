@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class</title>
+    <script>
+      class Person {
+        //클래스 필드
+        name = "Smith";
+        //메서드
+        getName = function () {
+          return this.name;
+        };
+      }
+
+      //객체 생성
+      const me = new Person();
+
+      document.write(me);
+      document.write("<br>");
+      document.write(me.name);
+      document.write("<br>");
+      document.write(me.getName());
+    </script>
+  </head>
+  <body></body>
+</html>
