@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      h1 {
+        text-align: center;
+      }
+      div#game {
+        width: 450px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      div.result-img {
+        position: relative;
+        width: 220px;
+        float: left;
+      }
+      div.result-img:first-child {
+        text-align: right;
+      }
+      div.result-img:last-child {
+        text-align: left;
+      }
+      div.result-img span {
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 20px;
+        width: 120px;
+        text-align: center;
+        background-color: #f4f2c6;
+        position: absolute;
+        top: 25%;
+        left: 20%;
+      }
+
+      /*그림에 커서를 올리면 손바닥 아이콘으로 변하게 처리*/
+      .user-option {
+        cursor: pointer;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        //computer, user가 선택한 값을 표시할 이미지
+        const gameImage = document.querySelectorAll(".result-img img");
+
+        //user가 선택할 이미지
+        const userOptions = document.getElementsByClassName("user-option");
+
+        //게임 결과 문구
+        const resultMessages = document.querySelectorAll(".result-img span");
+
+        //반복문을 이용한 이벤트 연결
+        for (let i = 0; i < userOptions.length; i++) {
+          userOptions[i].onclick = function () {
+            //난수 발생시켜 컴퓨터 값 할당
+            const computerPicked = Math.floor(Math.random() * 3);
+
+            gameImage[0].src = userOptions[computerPicked].src;
+            gameImage[1].src = this.src;
+
+            gameImage[0].style = "display: block";
+            gameImage[1].style = "display: block";
+
+            //0:가위, 1:바위, 2:보
+            const result = rockSissorsPaper(i, computerPicked);
+            if (result > 0) {
+              resultMessages[0].textContent = "컴퓨터 패";
+              resultMessages[1].textContent = "사용자 승";
+            } else if (result == 0) {
+              resultMessages[0].textContent = "무승부";
+              resultMessages[1].textContent = "무승부";
+            } else {
+              resultMessages[0].textContent = "컴퓨터 승";
+              resultMessages[1].textContent = "사용자 패";
+            }
+          };
+        }
+      };
+
+      //사용자 승이면 1, 무승부면 0, 사용자 패면 -1 반환
+      function rockSissorsPaper(user, computer) {
+        if (user - computer == -2 || user - computer == 1) {
+          return 1;
+        } else if (user - computer == 0) {
+          return 0;
+        } else {
+          return -1;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>가위바위보 게임</h1>
+    <div id="game">
+      <div>
+        <img
+          src="../files/timg0.png"
+          class="user-option"
+          id="img0"
+          width="90"
+        />
+        <img
+          src="../files/timg1.png"
+          class="user-option"
+          id="img1"
+          width="90"
+        />
+        <img
+          src="../files/timg2.png"
+          class="user-option"
+          id="img2"
+          width="90"
+        />
+      </div>
+      <div>
+        <div class="result-img">
+          <img alt="컴퓨터" src="" style="display: none" /><span></span>
+        </div>
+        <div class="result-img">
+          <img alt="사용자" src="" style="display: none" /><span></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
