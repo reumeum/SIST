@@ -1,42 +1,42 @@
 <!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>캔버스</title>
-    <script>
-      window.onload = function () {
-        const canvas = document.getElementById("canvas");
-        if (canvas.getContext) {
-          const context = canvas.getContext("2d");
-
-          //색칠된 삼각형
-          context.beginPath();
-          context.moveTo(50, 50); //시작점 표시
-          context.lineTo(150, 50);
-          context.lineTo(50, 150);
-
-          context.closePath();
-          context.fill();
-
-          //빨간색 테두리의 삼각형
-          context.beginPath(); //패스 시작
-          context.moveTo(80, 80); //시작점 표시
-          context.lineTo(200, 100);
-          context.lineTo(100, 200);
-
-          //패스의 시작 위치와 종료 위치를 직선으로 연결
-          context.closePath(); //패스 끝
-
-          context.strokeStyle = "rgb(200,0,0)";
-          context.stroke();
-        } else {
-          alert("브라우저가 캔버스를 지원하지 않습니다.");
-        }
-      };
-    </script>
-  </head>
-  <body>
-    <canvas id="canvas" width="500" height="300"> </canvas>
-  </body>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>캔버스 연습</title>
+<script type="text/javascript">
+window.onload=function(){
+	const canvas = document.getElementById('canvas');
+	if(canvas.getContext){
+		const context = canvas.getContext('2d');
+		
+		//색칠된 삼각형
+		context.beginPath();
+		context.moveTo(50,50); //시작점 표시
+		context.lineTo(150,50);
+		context.lineTo(50,150);		
+		
+		context.closePath();
+		context.fill();		
+		
+		//빨간색 테두리의 삼각형
+		context.beginPath();//패스 시작
+		context.moveTo(80,80); //시작점 표시
+		context.lineTo(200,100);
+		context.lineTo(100,200);
+		
+		//패스의 시작 위치와 종료 위치를 직선으로 연결
+		context.closePath(); //패스 끝
+		
+		context.strokeStyle = 'rgb(200,0,0)';
+		context.stroke();
+		
+	}else{
+		alert('브라우저가 캔버스를 지원하지 않습니다.');
+	}
+};
+</script>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="300"></canvas>
+</body>
 </html>

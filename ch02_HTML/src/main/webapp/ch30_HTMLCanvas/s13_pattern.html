@@ -11,12 +11,13 @@ window.onload=function(){
 		
 		//Image 객체 생성
 		const img = new Image();
-		img.src = '../files/landscape.jpg';
+		img.src = '../files/pattern.png';
 		img.onload=function(){
-			                //이미지 객체,x,y
-			context.drawImage(img,10,10);//원래 크기 표기
-			                 //이미지 객체,x,y,width,height
-			context.drawImage(img,10,500,200,100);
+			//이미지 반복 지정(repeat,repeat-x,repeat-y,no-repeat)
+			let pttn = context.createPattern(img,'repeat');
+			//생성한 패턴 지정
+			context.fillStyle = pttn;
+			context.fillRect(0,0,500,300);
 		};
 		
 	}else{
@@ -26,7 +27,7 @@ window.onload=function(){
 </script>
 </head>
 <body>
-	<canvas id="canvas" width="800" height="700"></canvas>
+	<canvas id="canvas" width="500" height="300"></canvas>
 </body>
 </html>
 
