@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>click, mouseover, mouseout, hover 이벤트</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(() => {
+        //click 이벤트 연결
+        $("#btn1").click(() => {
+          $("p").css("background-color", "yellow");
+        });
+
+        //mouseover 이벤트 연결
+        $("#btn2").mouseover(() => {
+          $("p").css("background-color", "pink");
+        });
+
+        //mouseout 이벤트 연결
+        $("#btn2").mouseout(() => {
+          $("p").css("background-color", "purple");
+        });
+
+        $("#btn3").hover(
+          function () {
+            $("p").css("background-color", "green");
+          },
+          function () {
+            $("p").css("background-color", "skyblue");
+          }
+        );
+      });
+    </script>
+  </head>
+  <body>
+    <button id="btn1">click</button>
+    <button id="btn2">mouseover/out</button>
+    <button id="btn3">hover</button>
+    <p>내용</p>
+  </body>
+</html>

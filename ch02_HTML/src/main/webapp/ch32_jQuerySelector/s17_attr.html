@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>문서 객체의 속성 처리</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      //문서가 준비 완료되면 매개변수로 전달된 함수 실행
+      //=$(document).ready(function() {});
+      $(function () {
+        //attr 메서드는 속성과 관련된 모든 기능을 수행
+
+        //하나의 속성 제어
+        //$('img').attr('width',100);
+
+        //복수의 속성 제어
+        //$("img").attr("width", 100).attr("height", 100);
+
+        //복수의 속성 제어 - 객체 이용
+        $("img").attr({
+          width: 200,
+          height: 200,
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <img src="../files/Desert.jpg" alt="" />
+    <img src="../files/coffee.jpg" alt="" />
+    <img src="../files/ice.jpg" alt="" />
+  </body>
+</html>

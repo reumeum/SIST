@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(() => {
+        /*
+        [실습]
+        도서 정보를 테이블에 표시하시오. (배열에 도서명, 분류, 정상가격 저장)
+        -----------------------------
+        도서명      분류    정상가격    할인가격(5%)
+        JAVA        IT     20,000원    19,000원
+        미술사      예술    30,000원    28,500원
+        노래연습    예술    10,000원    9,500원
+        한국사      역사    50,000원    47,000원
+        */
+
+        const books = [
+          { title: "JAVA", category: "IT", price: 20000 },
+          { title: "미술사", category: "예술", price: 30000 },
+          { title: "노래연습", category: "예술", price: 10000 },
+          { title: "한국사", category: "역사", price: 50000 },
+        ];
+
+        let output =
+          "<tr><td>도서명</td><td>분류</td><td>정상가격</td><td>할인가격(5%)</td></tr>";
+
+        $.each(books, function (index, item) {
+          output += "<tr>";
+          output += "<td>" + item.title + "</td>";
+          output += "<td>" + item.category + "</td>";
+          output += "<td>" + item.price.toLocaleString() + "원</td>";
+          output += "<td>" + (item.price * 0.95).toLocaleString() + "원</td>";
+          output += "</tr>";
+        });
+
+        $("#output").append(output);
+      });
+    </script>
+  </head>
+  <body>
+    <table id="output" border="1"></table>
+  </body>
+</html>
