@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>메서드를 이용한 이벤트 연결</title>
+    <style>
+      div {
+        margin: 5px;
+        padding: 3px;
+        border-width: 3px;
+        border-style: solid;
+        border-color: black;
+        border-radius: 10px;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(() => {
+        //이벤트 연결
+        $("div").on("click", function () {
+          let header = $("h1", this).text();
+          let paragraph = $("p", this).text();
+          alert(header + "\n" + paragraph);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div>
+      <h1>Header1</h1>
+      <p>Paragraph1</p>
+    </div>
+    <div>
+      <h1>Header2</h1>
+      <p>Paragraph2</p>
+    </div>
+    <div>
+      <h1>Header3</h1>
+      <p>Paragraph3</p>
+    </div>
+  </body>
+</html>

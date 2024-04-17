@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dialog</title>
+    <link rel="stylesheet" href="../css/jquery-ui.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
+    <script>
+      $(function () {
+        $("#dialog").dialog({
+          autoOpen: false, //수동으로 다이얼로그 열기
+          show: {
+            //열릴 때
+            effect: "blind",
+            duration: 1000,
+          },
+          hide: {
+            //닫힐 때
+            effect: "explode",
+            duration: 1000,
+          },
+        });
+
+        $("#opener").click(function () {
+          $("#dialog").dialog("open");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <button id="opener">Open Dialog</button>
+    <div id="dialog" title="Basic dialog">
+      <p>
+        다이얼로그는 움직일 수 있으며 다이얼로그 창은 x버튼을 누르면 닫을 수도
+        있음
+      </p>
+    </div>
+  </body>
+</html>

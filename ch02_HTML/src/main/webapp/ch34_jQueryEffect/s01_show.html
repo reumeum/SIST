@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>효과</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(() => {
+        $("#btn1").on("click", function () {
+          //속도값: fast(200), normal(400), slow(600) - 밀리세컨드 지정 가능
+          //태그 노출    //속도값
+          $("#dog").show("slow", function () {
+            alert("노출 완료!!");
+          });
+        });
+
+        $("#btn2").on("click", function () {
+          $("#dog").hide(1000, function () {
+            alert("숨김 완료");
+          });
+        });
+
+        //태그 노출/숨김 이벤트 연결
+        $("#btn3").on("click", function () {
+          $("#dog").toggle("slow");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <button id="btn1">Show</button>
+    <button id="btn2">Hide</button>
+    <button id="btn3">Toggle</button>
+    <br />
+    <img
+      src="../files/dog.png"
+      id="dog"
+      width="120"
+      height="100"
+      style="display: none"
+    />
+  </body>
+</html>

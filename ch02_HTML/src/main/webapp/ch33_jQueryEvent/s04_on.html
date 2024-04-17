@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>on메서드를 이용한 이벤트 연결</title>
+    <style>
+      .reverse {
+        background-color: black;
+        color: white;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(function () {
+        //하나의 이벤트 연결
+                //이벤트 타입, 이벤트 핸들러
+        $("h1").on("click", function () {
+          $(this).html(function (index, html) {
+            return html + "+";
+          });
+        });
+
+        //복수의 이벤트 연결
+        $("h1").on({
+          mouseover: function () {
+            $(this).addClass("reverse"); //클래스 추가
+          },
+          mouseout: function () {
+            $(this).removeClass("reverse"); //클래스 삭제
+          },
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Header-0</h1>
+    <h1>Header-1</h1>
+    <h1>Header-2</h1>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>droppable</title>
+    <style>
+      #draggable {
+        width: 80px;
+        height: 80px;
+        padding: 0.5em;
+        float: left;
+        margin: 10px 10px 10px 0;
+      }
+
+      #droppable {
+        width: 150px;
+        height: 150px;
+        padding: 0.5em;
+        float: left;
+        margin: 10px;
+        background-color: grey;
+      }
+    </style>
+    <link rel="stylesheet" href="../css/jquery-ui.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
+    <script>
+      $(function () {
+        //태그 드래그하기
+        $("#draggable").draggable();
+
+        //태그 드롭하기
+        $("#droppable").droppable({
+          drop: function () {
+            $(this).addClass("ui-state-highlight").find("p").html("Dropped!");
+          },
+          out: function () {
+            $(this)
+              .removeClass("ui-state-highlight")
+              .find("p")
+              .html("Drop here");
+          },
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="draggable" class="ui-widget-content">
+      <p>Drag me around</p>
+    </div>
+    <div id="droppable" class="ui-widget-content">
+      <p>Drop here</p>
+    </div>
+  </body>
+</html>
