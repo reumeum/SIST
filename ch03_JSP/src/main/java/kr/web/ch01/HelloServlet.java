@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 // 일반 클래스를 서블릿으로 사용할 경우 HttpServlet를 상속시켜야 한다.
+
+// 호출 주소 지정
 @WebServlet("/helloServlet")
 public class HelloServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {

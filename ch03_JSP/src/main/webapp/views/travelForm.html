@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>[실습] 여행지 선택</title>
+<script type="text/javascript">
+	window.onload = function() {
+		//폼태그 이벤트 연결
+		const myForm = document.getElementById("myForm");
+
+		myForm.onsubmit = function() {
+			//이름 유효성 체크
+			const nameInputField = document.getElementById("name");
+			if (nameInputField.value.trim().length <=0) {
+				alert("이름을 입력해주세요.");
+				nameInputField.value = "";
+				return false;
+			}
+
+			//여행지는 2개 이상 필수 선택
+			const cityInputFields = document.getElementsByClassName("cb-city");
+			
+			let checkedCtn = 0;
+			for (let i=0; i < cityInputFields.length; i++) {
+				if (cityInputFields[i].checked) checkedCtn++;
+			}
+			
+			if (checkedCtn < 2) {
+				alert("여행지는 2개 이상 선택해주세요");
+				return false;
+			}
+
+		}
+		
+		
+	}
+</script>
+</head>
+<body>
+	<h3>여행지를 선택하세요. (2개 이상 선택)</h3>
+	<form action="/ch03_JSP/travel" method="POST" id="myForm">
+		<label for="name">이름</label> <input type="text" id="name" name="name"><br>
+		<input type="checkbox" name="city" value="그라나다" id="granada"
+			class="cb-city"> <label for="granada">그라나다</label> <input
+			type="checkbox" name="city" value="바르셀로나" id="barcelona"
+			class="cb-city"> <label for="barcelona">바르셀로나</label> <input
+			type="checkbox" name="city" value="세비야" id="sevilla" class="cb-city">
+		<label for="sevilla">세비야</label> <input type="checkbox" name="city"
+			value="마드리드" id="madrid" class="cb-city"> <label for="madrid">마드리드</label>
+		<input type="checkbox" name="city" value="마요르카" id="mallorca"
+			class="cb-city"> <label for="mallorca">마요르카</label> <input
+			type="submit" value="전송">
+	</form>
+</body>
+</html>
