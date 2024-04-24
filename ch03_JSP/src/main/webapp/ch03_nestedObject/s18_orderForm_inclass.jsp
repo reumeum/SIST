@@ -7,46 +7,47 @@
 <title>음식 주문</title>
 <script type="text/javascript">
 	/*
-	 수량을 입력, 세가지 음식 중에서 하나는 꼭 주문
-	 -> 각각의 수량이 0 이상
-	 세개의 수량을 더했을 때 1 이상 
-	 [출력 예시]
-	 짜장면 2개
-	 짬뽕 1개
-	 총 지불금액 : 13,000원
+	수량을 입력, 세가지 음식 중에서 하나는 꼭 주문
+	-> 각각의 수량이 0 이상
+	세개의 수량을 더했을 때 1 이상 
+	[출력 예시]
+	짜장면 2개
+	짬뽕 1개
+	총 지불금액 : 13,000원
 
-	 짜장면 4,000원
-	 짬뽕 5,000원
-	 볶음밥 6,000원
+	짜장면 4,000원
+	짬뽕 5,000원
+	볶음밥 6,000원
 	 */
 
 	window.onload = function() {
 		const myForm = document.getElementById("myForm");
 
 		myForm.onsubmit = function() {
-			const menus = document.querySelectorAll('input[type="number"]');
+			const items = document.querySelectorAll('input[type="number"]');
 
-			let cnt = 0;
-			for (let i = 0; i < menus.length; i++) {
-				if (menus[i].value == "") {
-					alert("음식의 수량을 입력해주세요.");
-					menus[i].value = 0;
-					menus[i].focus();
+			for (let i = 0; i < items.length; i++) {
+				if (items[i].value == "") {
+					const label = document.querySelector('label[for="'
+							+ items[i].id + '"]');
+					alert(label.textContent + '의 수량을 입력하세요.');
+					items[i].value = 0;
+					items[i].focus();
 					return false;
-				}
-				cnt += menus[i].value;
-			}
+				} //end of if
 
-			if (cnt <= 0) {
-				alert('음식의 개수를 1개 이상 입력해주세요');
-				return false;
+			} //end of for
+			if (items[0].value == 0 && items[1].value == 0
+					&& items[2].value == 0) {
+				alert('세 가지 음식 중 하나는 꼭 주문해야 합니다.');
+				return false
 			}
 		}
 	}
 </script>
 </head>
 <body>
-	<form action="s19_order.jsp" method="post" id="myForm">
+	<form action="s19_order_inclass.jsp" method="post" id="myForm">
 		<table border="1">
 			<tr>
 				<td class="title">식사류</td>
