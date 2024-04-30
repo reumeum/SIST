@@ -19,7 +19,7 @@ String user_id = (String) session.getAttribute("user_id");
 	if (user_id == null) { //로그인이 되지 않은 경우
 	%>
 		<a href="registerUserForm.jsp">회원가입</a>
-		<a href="longinForm.jsp">로그인</a>
+		<a href="loginForm.jsp">로그인</a>
 	
 	<%
 	} else { //로그인이 된 경우

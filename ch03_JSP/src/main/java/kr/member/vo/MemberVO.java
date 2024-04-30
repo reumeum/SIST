@@ -12,6 +12,14 @@ public class MemberVO {
 	private String phone;
 	private Date reg_date;
 	
+	//비밀번호 체크
+	public boolean isCheckedPassword(String userPasswd) {
+		if (passwd.equals(userPasswd)) { //비밀번호 일치
+			return true;
+		}
+		return false; //비밀번호 불일치
+	}
+	
 	public int getNum() {
 		return num;
 	}

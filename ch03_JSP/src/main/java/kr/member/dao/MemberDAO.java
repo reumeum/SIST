@@ -51,6 +51,33 @@ public class MemberDAO {
 		MemberVO member = null;
 		String sql = null;
 		
+		try {
+			//커넥션풀로부터 커넥션을 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "SELECT * FROM smember WHERE num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			//sql문 실행
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				member = new MemberVO();
+				member.setNum(rs.getInt("num"));
+				member.setId(rs.getString("id"));
+				member.setPasswd(rs.getString("passwd"));
+				member.setName(rs.getString("name"));
+				member.setEmail(rs.getString("email"));
+				member.setPhone(rs.getString("phone"));
+				member.setReg_date(rs.getDate("reg_date"));
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
 		return member;
 	}
 	
@@ -93,11 +120,51 @@ public class MemberDAO {
 	
 	//회원 정보 수정
 	public void updateMember(MemberVO member) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
 		
+		try {
+			conn = DBUtil.getConnection();
+			
+			sql = "UPDATE smember SET name=?,passwd=?,email=?,phone=? WHERE num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getName());
+			pstmt.setString(2, member.getPasswd());
+			pstmt.setString(3, member.getEmail());
+			pstmt.setString(4, member.getPhone());
+			pstmt.setInt(5, member.getNum());
+			
+			pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
 	}
 	
 	//회원 탈퇴(회원정보 삭제)
 	public void deleteMember(int num) throws Exception {
-		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			//커넥션 풀로부터 커넥션을 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "DELETE FROM smember WHERE num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			pstmt.executeUpdate();
+		} catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			//자원정리
+			DBUtil.executeClose(null, pstmt, conn);
+		}
 	}
 }
