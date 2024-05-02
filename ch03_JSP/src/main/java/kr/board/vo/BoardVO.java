@@ -12,6 +12,14 @@ public class BoardVO {
 	private String ip;
 	private Date reg_date;
 	
+	//비밀번호 체크
+	public boolean isCheckedPassword(String userPasswd) {
+		if(passwd.equals(userPasswd)) { //인증 성공
+			return true;
+		}
+		return false; //인증 실패
+	}
+	
 	// get/set 메서드
 	public int getNum() {
 		return num;
@@ -54,5 +62,11 @@ public class BoardVO {
 	}
 	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
+	}
+
+	@Override
+	public String toString() {
+		return "BoardVO [num=" + num + ", title=" + title + ", name=" + name + ", passwd=" + passwd + ", content="
+				+ content + ", ip=" + ip + ", reg_date=" + reg_date + "]";
 	}	
 }

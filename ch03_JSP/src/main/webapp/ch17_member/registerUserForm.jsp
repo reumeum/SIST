@@ -45,7 +45,7 @@
 			
 		}); //end of click
 		
-		//아이디 입력창에 데이터를 입력하며 중복체크 관련 정보 초기화
+		//아이디 입력창에 데이터를 입력하면 중복체크 관련 정보 초기화
 		$('#register_form #id').keydown(function() {
 			count = 0;
 			$('#id_signed').text('');

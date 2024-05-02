@@ -54,6 +54,22 @@ public class BoardDAO {
 		ResultSet rs = null;
 		String sql = null;
 		int count = 0;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT COUNT(*) FROM mboard";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				count = rs.getInt(1); //컬럼 인덱스 이용
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
 
 		return count;
 	}
@@ -69,8 +85,15 @@ public class BoardDAO {
 		try {
 			conn = DBUtil.getConnection();
 
-			sql = "SELECT * FROM mboard ORDER BY num DESC";
+			sql = "SELECT * FROM (SELECT a.*, rownum rnum "
+				+ "FROM (SELECT * FROM mboard ORDER BY num DESC)a)"
+				+ "WHERE rnum >= ? AND rnum <= ?";
+			
 			pstmt = conn.prepareStatement(sql);
+			
+			//?에 데이터 바인딩
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rs = pstmt.executeQuery();
 			list = new ArrayList<BoardVO>();
@@ -136,11 +159,51 @@ public class BoardDAO {
 
 	// 글 수정
 	public void modifyBoard(BoardVO boardVO) throws Exception {
-
+		System.out.println(boardVO);
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "UPDATE mboard SET title=?, name=?, content=?, ip=? WHERE num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardVO.getTitle());
+			pstmt.setString(2, boardVO.getName());
+			pstmt.setString(3, boardVO.getContent());
+			pstmt.setString(4, boardVO.getIp());
+			pstmt.setInt(5, boardVO.getNum());
+			
+			pstmt.executeUpdate();
+		} catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+				
 	}
 
 	// 글 삭제
 	public void deleteBoard(int num) throws Exception {
-
+		Connection conn =null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try {
+			//커넥션 풀로부터 커넥션을 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "DELETE FROM mboard WHERE num=?";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(1, num);
+			//sql문 실행
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
 	}
 }
