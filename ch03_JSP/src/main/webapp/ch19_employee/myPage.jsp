@@ -30,6 +30,9 @@ EmployeeVO vo = dao.getEmployee(num);
 				이름 : <%= vo.getName() %>
 			</li>
 			<li>
+				아이디 : <%= vo.getId() %>
+			</li>
+			<li>
 				급여 : <%= String.format("%,d원", vo.getSalary()) %>
 			</li>
 			<li>
@@ -42,7 +45,7 @@ EmployeeVO vo = dao.getEmployee(num);
 		<hr size="2" width="100%">
 		<div class="align-right">
 			<input type="button" value="수정" onclick="location.href='updateForm.jsp'">
-			<input type="button" value="삭제" onclick="location.href='delete.jsp'">
+			<input type="button" value="탈퇴" onclick="location.href='delete.jsp'">
 			<input type="button" value="홈으로" onclick="location.href='main.jsp'">
 		</div>
 	</div>

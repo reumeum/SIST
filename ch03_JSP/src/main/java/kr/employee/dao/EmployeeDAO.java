@@ -130,31 +130,53 @@ public class EmployeeDAO {
 		try {
 			conn = DBUtil.getConnection();
 			sql = "UPDATE semployee SET name=?,passwd=?,salary=?,job=? WHERE num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getPasswd());
+			pstmt.setInt(3, vo.getSalary());
+			pstmt.setString(4, vo.getJob());
+			pstmt.setInt(5, vo.getNum());
+			
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			throw new Exception(e);
 		} finally {
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}
-	//여기부터 다시 하면 됨. update.jsp 작성.
 
 	// 사원정보 삭제
 	public void deleteEmployee(int num) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		String sql = null;
 		
 		try {
 			conn = DBUtil.getConnection();
-			sql = "DELETE FROM semployee WHERE num=?";
+			conn.setAutoCommit(false);
+			sql = "DELETE FROM story WHERE num=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			
 			pstmt.executeUpdate();
+			
+			sql = "DELETE FROM semployee WHERE num=?";
+			
+			pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, num);
+			
+			pstmt2.executeUpdate();
+			
+			conn.commit();
+			
 		} catch (Exception e) {
+			conn.rollback();
 			throw new Exception(e);
 		} finally {
+			DBUtil.executeClose(null, pstmt2, null);
 			DBUtil.executeClose(null, pstmt, conn);
 		}
 	}

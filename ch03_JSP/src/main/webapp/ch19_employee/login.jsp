@@ -21,7 +21,6 @@ if (check) {
 	session.setAttribute("employee_num", vo.getNum());
 	%>
 		<script>
-		alert("로그인 성공");
 		location.href="main.jsp";
 		</script>
 	<%
@@ -29,7 +28,7 @@ if (check) {
 } else {
 %>
 <script type="text/javascript">
-	alert("아이디를 다시 입력해주세요");
+	alert("입력 정보를 확인해주세요");
 	history.go(-1);
 </script>
 <%

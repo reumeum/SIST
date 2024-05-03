@@ -14,6 +14,7 @@ String employee_id = (String) session.getAttribute("employee_id");
 <div class="page-main">
 	<h1>사원관리 메인</h1>
 	<div class="align-right">
+	<a href="list.jsp">사원이야기</a>
 	<%
 	if (employee_id == null) { //로그인이 되지 않은 경우
 	%>

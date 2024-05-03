@@ -8,6 +8,7 @@ Integer num = (Integer) session.getAttribute("employee_num");
 
 EmployeeDAO dao = EmployeeDAO.getInstance();
 if (num != null) {
+
 	dao.deleteEmployee(num);
 	session.invalidate();
 %>

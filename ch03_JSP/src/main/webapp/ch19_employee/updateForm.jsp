@@ -4,6 +4,7 @@
 <%@ page import="kr.employee.vo.EmployeeVO"%>
 <%
 Integer num = (Integer) session.getAttribute("employee_num");
+String id = (String) session.getAttribute("employee_id");
 
 if (num != null) {
 	EmployeeDAO dao = EmployeeDAO.getInstance();
@@ -20,8 +21,9 @@ if (num != null) {
 <body>
 	<div class="page-main">
 		<h1>사원정보 수정</h1>
-		<input type="hidden" name="num" value="<%=num%>">
 		<form action="update.jsp" method="post" id="update_form">
+			<input type="hidden" name="num" value="<%=num%>">
+			<input type="hidden" name="id" value="<%=id%>">
 			<ul>
 				<li><label for="name">이름</label> <input type="text" name="name"
 					id="name" class="input-check" maxlength="10" value="<%=vo.getName()%>"></li>
