@@ -1,7 +1,6 @@
 package kr.web.mvc;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,23 +20,39 @@ public class DispatcherServlet extends HttpServlet {
 	}
 	
 	private void requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String message = request.getParameter("message");
+		Action com = null;
+		String view = null;
 		
-		String result = null;
-		if (message == null || message.equals("")) {
-			result = "메시지가 없음";
-		} else if (message.equals("name")) {
-			result="홍길동";
-		} else if (message.equals("base")) {
-			result="기본 호출";
-		} else {
-			result="잘못된 호출";
+		String command = request.getRequestURI();
+		System.out.println("1:"+command);
+		if (command.indexOf(request.getContextPath()) == 0) {
+			command = command.substring(request.getContextPath().length());
 		}
-		//					  속성명   속성값
-		request.setAttribute("result", result);
+		System.out.println("2:"+command);
+		
+		if (command.equals("/list.do")) {
+			com = new ListAction();
+		} else if (command.equals("/write.do")) {
+			com = new WriteAction();
+		} else if (command.equals("/detail.do")) {
+			com = new DetailAction();
+		} else if (command.equals("/update.do")) {
+			com = new UpdateAction();
+		} else if (command.equals("/delete.do")) {
+			com = new DeleteAction();
+		} else {
+			response.sendError(404);
+			return;
+		}
+		
+		try {
+			view = com.execute(request, response);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		//forward 방식으로 view(jsp) 호출
-		RequestDispatcher dispatcher = request.getRequestDispatcher("views/messageView.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
 	}
 }

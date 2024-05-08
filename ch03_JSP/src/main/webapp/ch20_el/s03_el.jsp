@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 request.setCharacterEncoding("utf-8");
 %>
@@ -19,6 +20,10 @@ request.setCharacterEncoding("utf-8");
 	<input type="submit" value="확인">
 </form>
 <br>
+<c:forEach var="i" items="${paramValues.season}">
+	${i}<br>
+</c:forEach>
+-------------------------<br>
 ${paramValues.season[0]}<br>
 ${paramValues.season[1]}<br>
 ${paramValues.season[2]}<br>
