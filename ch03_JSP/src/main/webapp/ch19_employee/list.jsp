@@ -42,6 +42,9 @@ if (count > 0) {
 	href="<%=request.getContextPath()%>/css/style.css" type="text/css">
 </head>
 <body>
+	<%
+	if (count > 0) {
+	%>
 	<div class="page-main">
 		<div class="align-right">
 			<%
@@ -83,7 +86,7 @@ if (count > 0) {
 		<!-- 목록 출력 끝 -->
 		<!-- 페이지 표시 시작 -->
 		<p>
-		<div class="align-center">
+			<div class="align-center">
 			<%=util.getPage()%>
 		</div>
 		<!--  페이지 표시 끝 -->
@@ -98,7 +101,22 @@ if (count > 0) {
 				}
 				%>
 				<input type="button" value="홈으로" onclick="location.href='main.jsp'">
+		
 		</div>
 	</div>
+<%
+} else {
+	%>
+	<div class="page-main">
+	<h1>게시글 목록</h1>
+	작성된 글이 없습니다. <p></p>
+		<div class="align-right">
+			<input type="button" value="글쓰기" onclick="location.href='insertForm.jsp'">
+			<input type="button" value="홈으로" onclick="location.href='main.jsp'">
+		</div>
+	</div>
+	<%
+}
+%>
 </body>
 </html>
