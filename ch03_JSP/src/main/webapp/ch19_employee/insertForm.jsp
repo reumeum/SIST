@@ -11,7 +11,7 @@ if (num == null) {
 %>
 <script type="text/javascript">
 	alert("로그인 후 이용해주세요.");
-	location.replace("longinForm.jsp");
+	location.replace("loginForm.jsp");
 </script>
 <%
 }
