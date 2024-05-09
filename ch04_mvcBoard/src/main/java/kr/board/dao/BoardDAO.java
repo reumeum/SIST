@@ -131,17 +131,82 @@ public class BoardDAO {
 		ResultSet rs = null;
 		BoardVO board = null;
 		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT * FROM svboard WHERE num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				board = new BoardVO();
+				board.setNum(rs.getInt("num"));
+				board.setTitle(rs.getString("title"));
+				board.setName(rs.getString("name"));
+				board.setPasswd(rs.getString("passwd"));
+				board.setEmail(rs.getString("email"));
+				board.setContent(rs.getString("content"));
+				board.setReg_date(rs.getDate("reg_date"));
+			}
+			
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
 
 		return board;
 	}
 
 	// 글 수정
 	public void update(BoardVO boardVO) throws Exception {
-
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			
+			sql = "UPDATE svboard SET title=?,name=?,email=?,content=?,ip=? WHERE num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardVO.getTitle());
+			pstmt.setString(2, boardVO.getName());
+			pstmt.setString(3, boardVO.getEmail());
+			pstmt.setString(4, boardVO.getContent());
+			pstmt.setString(5, boardVO.getIp());
+			pstmt.setInt(6, boardVO.getNum());
+			
+			pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
 	}
 
 	// 글 삭제
 	public void delete(int num) throws Exception {
-
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "DELETE FROM svboard WHERE num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
 	}
 }
