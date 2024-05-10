@@ -45,7 +45,7 @@ public class MemberDAO {
 
 			sql = "INSERT INTO zmember (mem_num, id) VALUES(?,?)";
 			pstmt2 = conn.prepareStatement(sql);
-			pstmt.setInt(1, num);
+			pstmt2.setInt(1, num);
 			pstmt2.setString(2, member.getId());
 			pstmt2.executeUpdate();
 
@@ -60,7 +60,7 @@ public class MemberDAO {
 			pstmt3.setString(6, member.getZipcode());
 			pstmt3.setString(7, member.getAddress1());
 			pstmt3.setString(8, member.getAddress2());
-			pstmt.executeUpdate();
+			pstmt3.executeUpdate();
 			
 			//sql 실행 시 모두 성공하면 commit
 			conn.commit();
@@ -78,7 +78,7 @@ public class MemberDAO {
 	}
 
 	// ID 중복 체크 및 로그인 처리
-	public MemberVO checkMemver(String id) throws Exception {
+	public MemberVO checkMember(String id) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /*전체 레이아웃
-----------------------------------*/
+--------------------------------*/
 body {
 	width: 960px;
 	margin: 0 auto;
@@ -22,25 +22,21 @@ a:hover {
 	text-decoration: none;
 	color: #6C6C6C;
 }
-
-
 /*페이지 레이아웃
-----------------------------------*/
+--------------------------------*/
 .page-main {
 	background: #FFFFFF;
 	margin: 40px 0;
 	border-radius: 5px;
-	box-shadow: 0 2px 6px rgba(100,100,100,0.3);
+	box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
 	min-height: 650px;
 }
 
 .content-main {
 	padding: 10px 20px;
 }
-
-
-/*공통 메시지
-----------------------------------*/
+/*공통 메세지
+--------------------------------*/
 .result-display {
 	width: 400px;
 	height: 200px;
@@ -50,10 +46,8 @@ a:hover {
 	align-items: center; /*세로 정렬*/
 	justify-content: center; /*가로 정렬*/
 }
-
-
 /*공통 정렬
-----------------------------------*/
+--------------------------------*/
 .align-center {
 	text-align: center;
 }
@@ -61,10 +55,8 @@ a:hover {
 .align-right {
 	text-align: right;
 }
-
-
 /*메뉴
-----------------------------------*/
+--------------------------------*/
 #main_logo {
 	padding-top: 20px;
 }
@@ -93,9 +85,54 @@ a:hover {
 	vertical-align: middle;
 }
 
-#main_nav ul li.main-logout {
+#main_nav ul li.menu-logout {
 	width: 150px;
 	text-align: left;
+}
+/*공통 등록, 수정 폼
+--------------------------------*/
+form {
+	width: 600px;
+	margin: 0 auto;
+	border: 1px solid #000;
+	padding: 10px 10px 10px 30px;
+}
+
+form ul li {
+	clear: both; /* label의 float때문에 생성 */
+}
+
+form ul li label {
+	width: 130px;
+	float: left; /*태그를 왼쪽으로 정렬*/
+}
+
+ul {
+	list-style: none;
+}
+
+input {
+	margin-top: 4px;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+	width: 310px;
+}
+
+#register_form input[id="id"] {
+	width: 223px;
+}
+
+input[id="zipcode"] { /* 속성선택자 */
+	width: 205px;
+}
+
+input[type="number"] {
+	width: 100px;
+}
+
+.form_notice {
+	margin-left: 130px;
 }
 
 /*목록*/
@@ -109,20 +146,4 @@ table {
 table td, table th {
 	border: 1px solid #000;
 	padding: 5px;
-}
-/*등록, 수정폼*/
-form {
-	width: 500px;
-	margin: 0 auto;
-	border: 1px solid #000;
-	padding: 10px 10px 10px 30px;
-}
-
-ul {
-	list-style: none;
-}
-
-label {
-	width: 100px;
-	float: left; /*태그를 왼쪽으로 정렬*/
 }
