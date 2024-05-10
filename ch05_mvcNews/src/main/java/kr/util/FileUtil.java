@@ -21,9 +21,12 @@ public class FileUtil {
 		Part part = request.getPart(param);
 		// 파일명 구하기
 		String filename = part.getSubmittedFileName();
-		filename = UUID.randomUUID() + "_" + filename;
-		part.write(upload + "/" + filename);
-		
+		if (!filename.isEmpty()) {
+			//팡리 중복 방지를 위해 임의의 값_원래 파일명 형식으로 변경
+			filename = UUID.randomUUID() + "_" + filename;
+			part.write(upload + "/" + filename);
+			
+		}
 		return filename;
 	}
 
