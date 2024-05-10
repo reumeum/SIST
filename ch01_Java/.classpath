@@ -7,6 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="libs"/>
-	<classpathentry kind="lib" path="libs/ojdbc8.jar"/>
+	<classpathentry kind="lib" path="C:/javaWork/program/설치자료/ojdbc8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
