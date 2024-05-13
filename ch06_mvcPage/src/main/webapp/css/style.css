@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
-/*전체 레이아웃
---------------------------------*/
+/* 전체 레이아웃
+---------------------*/
 body {
 	width: 960px;
 	margin: 0 auto;
@@ -22,8 +22,8 @@ a:hover {
 	text-decoration: none;
 	color: #6C6C6C;
 }
-/*페이지 레이아웃
---------------------------------*/
+/* 페이지 레이아웃
+---------------------*/
 .page-main {
 	background: #FFFFFF;
 	margin: 40px 0;
@@ -35,8 +35,8 @@ a:hover {
 .content-main {
 	padding: 10px 20px;
 }
-/*공통 메세지
---------------------------------*/
+/* 공통 메시지
+---------------------*/
 .result-display {
 	width: 400px;
 	height: 200px;
@@ -46,8 +46,8 @@ a:hover {
 	align-items: center; /*세로 정렬*/
 	justify-content: center; /*가로 정렬*/
 }
-/*공통 정렬
---------------------------------*/
+/* 공통 정렬
+---------------------*/
 .align-center {
 	text-align: center;
 }
@@ -55,8 +55,8 @@ a:hover {
 .align-right {
 	text-align: right;
 }
-/*메뉴
---------------------------------*/
+/* 메뉴
+---------------------*/
 #main_logo {
 	padding-top: 20px;
 }
@@ -89,8 +89,8 @@ a:hover {
 	width: 150px;
 	text-align: left;
 }
-/*공통 등록, 수정 폼
---------------------------------*/
+/* 공통 등록, 수정 폼
+---------------------*/
 form {
 	width: 600px;
 	margin: 0 auto;
@@ -99,7 +99,7 @@ form {
 }
 
 form ul li {
-	clear: both; /* label의 float때문에 생성 */
+	clear: both;
 }
 
 form ul li label {
@@ -123,7 +123,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 	width: 223px;
 }
 
-input[id="zipcode"] { /* 속성선택자 */
+input[id="zipcode"] {
 	width: 205px;
 }
 
@@ -131,8 +131,74 @@ input[type="number"] {
 	width: 100px;
 }
 
-.form_notice {
+.form-notice {
 	margin-left: 130px;
+}
+/* 로그인
+---------------------*/
+#login_form {
+	width: 300px;
+	margin: 0 auto;
+	padding: 0;
+	border: none;
+}
+
+#login_form ul {
+	padding: 0;
+}
+
+.floating-label { /*floating label 설정*/
+	position: relative;
+}
+
+.floating-label>.form-input {
+	width: 300px;
+	height: 32px;
+	padding: 0.55rem 0.55rem;
+}
+
+.floating-label>label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 1.05rem 0.75rem;
+	transition: all 0.25s;
+}
+
+.floating-label>.form-input::placeholder {
+	color: transparent;
+}
+
+.floating-label>.form-input:focus, .floating-label>.form-input:not(:placeholder-shown)
+	{
+	padding-top: 1.125rem;
+	padding-bottom: 0.125rem;
+}
+
+.floating-label>.form-input:focus+label, .floating-label>.form-input:not(:placeholder-shown)+label
+	{
+	opacity: 0.65;
+	transform: scale(0.85) translateY(-0.5rem) translateX(-0.5rem);
+}
+
+/* MY페이지
+---------------------*/
+.mypage-div {
+	width: 48%;
+	float: left;
+	padding: 5px;
+}
+
+.mypage-end {
+	clear: both;
+}
+
+.my-photo {
+	object-fit: cover; /*이미지가 꽉차게*/
+	/*정사각형이 아니라 직사각형일 경우 원 안에 보여지게 할 중심 이미지의 위치를 지정*/
+	object-position: top;
+	/*사각형의 모서리를 둥글게*/
+	border-radius: 50%; /*원형*/
 }
 
 /*목록*/

@@ -19,12 +19,12 @@
 		</c:if>
 		<c:if test="${!empty user_num && !empty user_photo}">
 		<li class="menu-profile">
-			<img alt="프로필 사진" src="${pageContext.request.contextPath}/upload/${user_photo}" width="25" height="25" class="my-photo">
+			<img src="${pageContext.request.contextPath}/upload/${user_photo}" width="25" height="25" class="my-photo">
 		</li>
 		</c:if>
 		<c:if test="${!empty user_num && empty user_photo}">
 		<li class="menu-profile">
-			<img alt="프로필 기본 이미지" src="${pageContext.request.contextPath}/images/face.png" width="25" height="25" class="my-photo">
+			<img src="${pageContext.request.contextPath}/images/face.png" width="25" height="25" class="my-photo">
 		</li>
 		</c:if>
 		<c:if test="${!empty user_num}">
