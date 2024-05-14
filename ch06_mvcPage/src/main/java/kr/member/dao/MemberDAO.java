@@ -156,8 +156,53 @@ public class MemberDAO {
 	}
 
 	// 회원정보 수정
+	public void modifyUser(MemberVO member) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "UPDATE zmember_detail SET name=?,phone=?,email=?,zipcode=?,address1=?,address2=?,modify_date=SYSDATE WHERE mem_num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getName());
+			pstmt.setString(2, member.getPhone());
+			pstmt.setString(3, member.getEmail());
+			pstmt.setString(4, member.getZipcode());
+			pstmt.setString(5, member.getAddress1());
+			pstmt.setString(6, member.getAddress2());
+			pstmt.setInt(7, member.getMem_num());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
 
 	// 비밀번호 수정
+	public void updatePassword(String passwd, int mem_num) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "UPDATE zmember_detail SET passwd=? WHERE mem_num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, passwd);
+			pstmt.setInt(2, mem_num);
+			
+			pstmt.executeUpdate();
+		} catch(Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
 
 	// 프로필 사진 수정
 	public void updateMyPhoto(String photo, int mem_num) throws Exception {
@@ -182,9 +227,61 @@ public class MemberDAO {
 	}
 
 	// 회원 탈퇴(회원정보 삭제)
+	public void deleteUser(int mem_num) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		String sql = null;
+		try {
+			conn = DBUtil.getConnection();
+			//오토커밋 해제
+			conn.setAutoCommit(false);
+			//zmember의 auth 값 변경
+			sql = "UPDATE zmember SET auth=0 WHERE mem_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mem_num);
+			pstmt.executeUpdate();
+			
+			//zmember_detail의 레코드 삭제
+			sql = "DELETE FROM zmember_detail WHERE mem_num=?";
+			pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, mem_num);
+			pstmt2.executeUpdate();
+			
+			//모든 sql문의 실행이 성공하면 커밋
+			conn.commit();
+		} catch (Exception e) {
+			//sql문이 하나라도 실패하면 롤백
+			conn.rollback();
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, null);
+			DBUtil.executeClose(null, pstmt2, conn);
+		}
+	}
 
 	// 관리자
 	// 전체 내용 개수, 검색 내용 개수
+	public int getMemberCountByAdmin(String keyfield, String keyword) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		String sub_sql = null;
+		int count = 0;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT COUNT(*) FROM zmember";
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		
+		return count;
+	}
 
 	// 목록, 검색 목록
 

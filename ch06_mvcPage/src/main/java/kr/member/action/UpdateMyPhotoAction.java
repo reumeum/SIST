@@ -38,7 +38,7 @@ public class UpdateMyPhotoAction implements Action {
 			FileUtil.removeFile(request, user_photo);
 			
 			//현재 파일로 세션 정보 갱신
-			session.setAttribute("user_photo", user_photo);
+			session.setAttribute("user_photo", photo);
 			
 			mapAjax.put("result", "success");
 		}

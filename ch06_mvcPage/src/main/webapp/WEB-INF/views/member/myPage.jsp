@@ -45,6 +45,47 @@ $(function() {
 		};
 	}); //end of change
 	
+	//이미지 전송
+	$('#photo_submit').click(function() {
+		if ($('#photo').val() =='') {
+			alert('파일을 선택하세요');
+			$('#photo').focus();
+			return;
+		}
+		//파일 전송
+		const form_data = new FormData();
+		//업로드할 파일은 $('#photo').files[0]를 호출할 수 없음
+		//$('#photo')[0].files[0] 또는 
+		//document.getElementById('photo').files[0] 형식으로 호출 가능
+		form_data.append('photo',$('#photo')[0].files[0]);
+		
+		$.ajax({
+			url: 'updateMyPhoto.do',
+			type: 'post',
+			data: form_data,
+			dataType: 'json',
+			contentType: false, //데이터 객체를 문자열로 바꿀지 설정. true이면 일반문자. false는 주로 데이터와 파일이 섞여있는 경우.
+			processData: false, //해당 타입을 true로 하면 'data' 속성의 데이터를 일반 text로 구분
+			success: function(param) {
+				if (param.result == 'logout') {
+					alert('로그인 후 사용하세요');
+				} else if (param.result == 'success') {
+					alert('프로필 사진이 수정되었습니다.');
+					//수정된 이미지 정보 저장
+					photo_path = $('.my-photo').attr('src');
+					$('#photo').val('');
+					$('#photo_choice').hide();
+					$('#photo_btn').show(); //수정 버튼 표시
+				} else {
+					alert('파일 전송 오류 발생');
+				}
+			},
+			error: function() {
+				alert('네트워크 오류 발생');
+			}
+		});
+	}); //end of click
+	
 	//이미지 미리보기 취소
 	$('#photo_reset').click(function() {
 		//초기 이미지 표시
@@ -79,7 +120,7 @@ $(function() {
 						</div>
 						<div id="photo_choice" style="display:none;">
 							<input type="file" id="photo" accept="image/gif,image/png,image/jpeg">
-							<input type="button" value="전송" id="photo_submit" onclick="location.href='updateMyPhoto.do'">
+							<input type="button" value="전송" id="photo_submit">
 							<input type="button" value="취소" id="photo_reset">
 						</div>
 					</li>
@@ -92,12 +133,13 @@ $(function() {
 					<li>이메일 : ${member.email}</li>
 					<li>우편번호 : ${member.zipcode}</li>
 					<li>주소 : ${member.address1} ${member.address2}</li>
+					<li>가입일 : ${member.reg_date}</li>
 					<c:if test="${!empty member.modify_date}">
 					<li>최근 정보 수정일 : ${member.modify_date}</li>
 					</c:if>
 				</ul>
-				<h3>비밀번호 수정</h3>
-				<h3>회원탈퇴</h3>
+				<h3>비밀번호 수정 <input type="button" value="비밀번호 수정" onclick="location.href='modifyPasswordForm.do'"></h3>
+				<h3>회원탈퇴 <input type="button" value="회원 탈퇴" onclick="location.href='deleteUserForm.do'"></h3>
 			</div>
 			<div class="mypage-div">
 				<h3>관심 게시글 목록</h3>
