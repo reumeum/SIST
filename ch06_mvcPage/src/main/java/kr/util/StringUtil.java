@@ -25,4 +25,12 @@ public class StringUtil {
 
 		return str.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 	}
+
+	// 큰따옴표 처리
+	public static String parseQuot(String str) {
+		if (str == null)
+			return null;
+
+		return str.replaceAll("\"", "&quot;");
+	}
 }

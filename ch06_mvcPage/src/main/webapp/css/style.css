@@ -272,21 +272,8 @@ ul.detail-sub li:last-child {
 	line-height: 250%;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* 게시판 글수정
+---------------------*/
+#file_detail {
+	margin: 5px 0 0 130px;
+}

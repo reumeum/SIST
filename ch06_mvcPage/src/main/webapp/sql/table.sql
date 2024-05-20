@@ -40,3 +40,11 @@ CREATE TABLE zboard (
 );
 
 CREATE SEQUENCE zboard_seq;
+
+--좋아요
+CREATE TABLE zboard_fav(
+	board_num NUMBER NOT NULL,
+	mem_num NUMBER NOT NULL,
+	CONSTRAINT zboard_fav_fk1 FOREIGN KEY(board_num) REFERENCES zboard(board_num),
+	CONSTRAINT zboard_fav_fk2 FOREIGN KEY(mem_num) REFERENCES zmember(mem_num)
+);
