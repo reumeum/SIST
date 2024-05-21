@@ -297,6 +297,29 @@ public class BoardDAO {
 	}
 	
 	//좋아요 등록
+	public void insertFav(BoardFavVO favVO) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			//커넥션풀로부터 커넥션 할당
+			conn = DBUtil.getConnection();
+			//SQL문 작성
+			sql = "INSERT INTO zboard_fav(board_num, mem_num) VALUES(?,?)";
+			//PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(sql);
+			//?에 데이터 바인딩
+			pstmt.setInt(1, favVO.getBoard_num());
+			pstmt.setInt(2, favVO.getMem_num());
+			//sql문 실행
+			pstmt.executeUpdate();
+		} catch(Exception e) {
+			throw new Exception();
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
 	//좋아요 개수
 	public int SelectFavCount(int board_num) throws Exception {
 		Connection conn = null;
@@ -307,7 +330,7 @@ public class BoardDAO {
 		
 		try {
 			conn = DBUtil.getConnection();
-			sql = "SELECE COUNT(*) FROM zboard_fav WHERE board_num=?";
+			sql = "SELECT COUNT(*) FROM zboard_fav WHERE board_num=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, board_num);
@@ -360,8 +383,79 @@ public class BoardDAO {
 	}
 	
 	//좋아요 삭제
-	//내가 선택한 좋아요 목록
+	public void deleteFav(BoardFavVO favVO) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "DELETE FROM zboard_fav WHERE board_num=? AND mem_num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, favVO.getBoard_num());
+			pstmt.setInt(2, favVO.getMem_num());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
 	
+	//내가 선택한 좋아요 목록
+	public List<BoardVO> getListBoardFav(int start, int end, int mem_num) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<BoardVO> list = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			
+			//(주의)zboard_fav의 회원번호(좋아요 클릭한 회원번호)로 검색되어야 하기때문에
+			//f.mem_num으로 표기해야 함
+			sql = "SELECT * FROM (SELECT a.*, rownum rnum FROM "
+					+ "(SELECT * FROM zboard b JOIN zmember m USING(mem_num) "
+					+ "JOIN zboard_fav f USING(board_num) WHERE f.mem_num=? ORDER BY board_num DESC)a) "
+					+ "WHERE rnum >= ? AND rnum <= ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mem_num);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rs = pstmt.executeQuery();
+			
+			list = new ArrayList<BoardVO>();
+			while (rs.next()) {
+				BoardVO board = new BoardVO();
+				board.setBoard_num(rs.getInt("board_num"));
+				board.setTitle(StringUtil.useNoHTML(rs.getString("title")));
+				board.setId(rs.getString("id"));
+				board.setReg_date(rs.getDate("reg_date"));
+				board.setHit(rs.getInt("hit"));
+				list.add(board);
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.getConnection();
+		}
+		
+		return list;
+		
+		
+		//댓글 등록
+		//댓글 개수
+		//댓글 목록
+		//댓글 상세(댓글 수정, 삭제시 작성자 회원번호 체크 용도로 사용)
+		//댓글 수정
+		//댓글 삭제
+		
+		
+	}
 	
 	
 	
