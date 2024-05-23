@@ -10,6 +10,7 @@ import kr.board.vo.BoardFavVO;
 import kr.board.vo.BoardReplyVO;
 import kr.board.vo.BoardVO;
 import kr.util.DBUtil;
+import kr.util.DurationFromNow;
 import kr.util.StringUtil;
 
 public class BoardDAO {
@@ -277,7 +278,16 @@ public class BoardDAO {
 			conn.setAutoCommit(false);
 			
 			//좋아요 삭제
+			sql = "DELETE FROM zboard_fav WHERE board_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board_num);
+			pstmt.executeUpdate();
+			
 			//댓글 삭제
+			sql = "DELETE FROM zboard_reply WHERE board_num=?";
+			pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, board_num);
+			pstmt2.executeUpdate();
 			
 			//부모글 삭제
 			sql = "DELETE FROM zboard WHERE board_num=?";
@@ -534,9 +544,13 @@ public class BoardDAO {
 			while(rs.next()) {
 				BoardReplyVO reply = new BoardReplyVO();
 				reply.setRe_num(rs.getInt("re_num"));
-				reply.setRe_date(rs.getString("re_date"));
-				reply.setRe_modifydate(
-						   rs.getString("re_modifydate"));
+				//날짜 -> 1분전, 1시간전, 1일전 형식의 문자열로 변환
+				reply.setRe_date(DurationFromNow.getTimeDiffLabel(rs.getString("re_date")));
+				
+				if (rs.getString("re_modifydate") != null) {
+					reply.setRe_modifydate(DurationFromNow.getTimeDiffLabel(rs.getString("re_modifydate")));
+				}
+			
 				reply.setRe_content(StringUtil.useBrNoHTML(
 						            rs.getString("re_content")));
 				reply.setBoard_num(rs.getInt("board_num"));
@@ -553,7 +567,78 @@ public class BoardDAO {
 		return list;
 	}
 	//댓글 상세(댓글 수정,삭제시 작성자 회원번호 체크 용도로 사용)
+	public BoardReplyVO getReplyBoard(int re_num) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoardReplyVO reply = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "SELECT * FROM zboard_reply WHERE re_num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, re_num);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				reply = new BoardReplyVO();
+				reply.setRe_num(rs.getInt("re_num"));
+				reply.setMem_num(rs.getInt("mem_num"));
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		
+		return reply;
+	}
+	
 	//댓글 수정
+	public void updateReplyBoard(BoardReplyVO reply) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			sql = "UPDATE zboard_reply SET re_content=?,re_modifydate=SYSDATE,re_ip=? WHERE re_num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, reply.getRe_content());
+			pstmt.setString(2, reply.getRe_ip());
+			pstmt.setInt(3, reply.getRe_num());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
+	
 	//댓글 삭제
+	public void deleteReplyBoard(int re_num) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			conn = DBUtil.getConnection();
+			sql = "DELETE FROM zboard_reply WHERE re_num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, re_num);
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
 	
 }
