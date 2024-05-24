@@ -94,6 +94,30 @@ a:hover {
 	width: 150px;
 	text-align: left;
 }
+
+/* 메인
+---------------------*/
+.image-space .horizontal-area {
+	margin: 2px;
+	padding: 3px;
+	width: 220px;
+	height: 240px;
+	float: left;
+	overflow: hidden;
+	text-align: center;
+}
+
+.image-space .horizontal-area img {
+	width: 215px;
+	height: 195px;
+	object-fit: cover;
+}
+
+.image-space .float-clear {
+	clear: both;
+}
+
+
 /* 공통 등록, 수정 폼
 ---------------------*/
 form {

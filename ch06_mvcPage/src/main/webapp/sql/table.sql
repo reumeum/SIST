@@ -64,3 +64,20 @@ CREATE TABLE zboard_reply (
 );
 
 CREATE SEQUENCE zreply_seq;
+
+--상품
+CREATE TABLE zitem(
+	item_num NUMBER NOT NULL,
+	name VARCHAR2(30) NOT NULL,
+	price NUMBER(9) NOT NULL,
+	quantity NUMBER(7) NOT NULL,
+	photo1 VARCAHR2(400) NOT NULL,
+	photo2 VARCHAR2(400) NOT NULL,
+	detail CLOB NOT NULL,
+	reg_date DATE DEFAULT SYSDATE NOT NULL,
+	modify_date DATE,
+	status NUMBER(1) NOT NULL, --표시 여부(판매 가능 여부)1:미표시, 2:표시
+	CONSTRAINT zitem_pk PRIMARY KEY (item_num)
+);
+
+CREATE SEQUENCE zitem_seq;
