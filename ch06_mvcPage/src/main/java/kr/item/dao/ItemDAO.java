@@ -114,7 +114,7 @@ public class ItemDAO {
 		String sql = null;
 		
 		try {
-			DBUtil.getConnection();
+			conn = DBUtil.getConnection();
 			sql = "SELECT * FROM zitem WHERE item_num=?";
 			
 			pstmt = conn.prepareStatement(sql);

@@ -81,3 +81,16 @@ CREATE TABLE zitem(
 );
 
 CREATE SEQUENCE zitem_seq;
+
+CREATE TABLE zcart (
+	cart_num NUMBER,
+	item_num NUMBER NOT NULL,
+	order_quantity NUMBER(7) NOT NULL,
+	reg_date DATE DEFAULT SYSDATE NOT NULL,
+	mem_num NUMBER NOT NULL, --상품 구매자 회원번호
+	CONSTRAINT zcart_pk PRIMARY KEY (cart_num),
+	CONSTRAINT zcart_fk1 FOREIGN KEY (item_num) REFERENCES zitem (item_num),
+	CONSTRAINT zcart_fk2 FOREIGN KEY (mem_num) REFERENCES zmember (mem_num)
+);
+
+CREATE SEQUENCE zcart_seq;
