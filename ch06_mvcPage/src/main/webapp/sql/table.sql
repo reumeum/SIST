@@ -94,3 +94,37 @@ CREATE TABLE zcart (
 );
 
 CREATE SEQUENCE zcart_seq;
+
+--주문
+CREATE TABLE zorder(
+	order_num NUMBER NOT NULL,
+	order_total NUMBER(9) NOT NULL,
+	payment NUMBER(1) NOT NULL, --결제방식
+	status NUMBER(1) DEFAULT 1 NOT NULL, --배송상태
+	receive_name VARCHAR2(30) NOT NULL,
+	receive_post VARCHAR2(90) NOT NULL,
+	receive_address1 VARCHAR2(90) NOT NULL,
+	receive_address2 VARCHAR2(90) NOT NULL,
+	receive_phone VARCHAR2(15) NOT NULL,
+	notice VARCHAR2(4000),
+	reg_date DATE DEFAULT SYSDATE NOT NULL,
+	modify_date DATE,
+	mem_num NUMBER NOT NULL,
+	CONSTRAINT zorder_pk PRIMARY KEY (order_num),
+	CONSTRAINT zorder_fk FOREIGN KEY (mem_num) REFERENCES zmember(mem_num)
+);
+
+CREATE SEQUENCE zorder_seq;
+
+CREATE TABLE zorder_detail(
+	detail_num NUMBER NOT NULL,
+	item_num NUMBER NOT NULL,
+	item_name VARCHAR2(30) NOT NULL,
+	item_price NUMBER(9) NOT NULL,
+	item_total NUMBER(9) NOT NULL,
+	order_quantity NUMBER(7) NOT NULL,
+	order_num NUMBER NOT NULL,
+	CONSTRAINT zorder_detail_pk PRIMARY KEY (detail_num),
+	CONSTRAINT zorder_detail_fk FOREIGN KEY (order_num) REFERENCES zorder (order_num)
+	--상품을 삭제할 수 있기 때문에 item을 fk 제약조건으로 주지 않음. order_detail의 정보를 삭제하면 안되기 때문에.
+);
