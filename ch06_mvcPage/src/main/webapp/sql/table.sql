@@ -128,3 +128,5 @@ CREATE TABLE zorder_detail(
 	CONSTRAINT zorder_detail_fk FOREIGN KEY (order_num) REFERENCES zorder (order_num)
 	--상품을 삭제할 수 있기 때문에 item을 fk 제약조건으로 주지 않음. order_detail의 정보를 삭제하면 안되기 때문에.
 );
+
+CREATE SEQUENCE zorder_detail_seq;
