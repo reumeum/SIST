@@ -7,7 +7,7 @@
 		<a href="${pageContext.request.contextPath}/main/main.do">회원제 게시판</a>
 	</h1>
 </div>
-<div id="main_nav">
+<div id="main_nav"> 
 	<ul>
 		<li>
 			<a href="${pageContext.request.contextPath}/board/list.do">게시판</a>

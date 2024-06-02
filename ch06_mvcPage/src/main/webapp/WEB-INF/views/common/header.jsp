@@ -15,8 +15,14 @@
 			<li><a
 				href="${pageContext.request.contextPath}/member/adminList.do">회원관리</a>
 			</li>
+			<li><a
+				href="${pageContext.request.contextPath}/item/adminWriteForm.do">상품관리</a>
+			</li>
 		</c:if> 
 		<c:if test="${!empty user_num}">
+			<li><a
+				href="${pageContext.request.contextPath}/cart/list.do">장바구니</a>
+			</li>
 			<li><a
 				href="${pageContext.request.contextPath}/member/myPage.do">MY페이지</a>
 			</li>
