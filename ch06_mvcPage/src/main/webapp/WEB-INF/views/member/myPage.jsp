@@ -15,7 +15,7 @@ $(function() {
 	$('#photo_btn').click(function() {
 		$('#photo_choice').show();
 		$(this).hide(); //수정 버튼 감추기
-	});
+	}); 
 	
 	
 	//이미지 미리보기

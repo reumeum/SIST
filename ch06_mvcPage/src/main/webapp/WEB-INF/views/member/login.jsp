@@ -5,7 +5,7 @@
 	<c:when test="${auth ==1}">
 		<!DOCTYPE html>
 		<html>
-<head>
+<head> 
 <meta charset="UTF-8">
 <title>로그인 정보</title>
 <link rel="stylesheet"

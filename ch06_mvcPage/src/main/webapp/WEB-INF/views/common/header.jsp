@@ -15,7 +15,7 @@
 			<li><a
 				href="${pageContext.request.contextPath}/member/adminList.do">회원관리</a>
 			</li>
-		</c:if>
+		</c:if> 
 		<c:if test="${!empty user_num}">
 			<li><a
 				href="${pageContext.request.contextPath}/member/myPage.do">MY페이지</a>

@@ -15,7 +15,7 @@
 	<div class="content-main">
 		<h2>안내</h2>
 		<div class="result-display">
-			<div class="align-center">
+			<div class="align-center"> 
 				<c:if test="${!empty accessMsg}">
 					${accessMsg}
 				</c:if>
