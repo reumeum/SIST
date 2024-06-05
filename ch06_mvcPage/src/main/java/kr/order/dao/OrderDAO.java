@@ -439,6 +439,52 @@ public class OrderDAO {
 	}
 
 	// 관리자 - 배송상태 수정
+	public void updateOrderStatus (OrderVO order) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			conn.setAutoCommit(false);
+			
+			sql = "UPDATE zorder SET status=?,modify_date=SYSDATE WHERE order_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, order.getStatus());
+			pstmt.setInt(2, order.getOrder_num());
+			pstmt.executeUpdate();
+			
+			//주문 취소일 경우만 상품개수 조정
+			if (order.getStatus() == 5) {
+				//주문번호에 해당하는 상품정보 구하기
+				List<OrderDetailVO> detailList = getListOrderDetail(order.getOrder_num());
+				sql = "UPDATE zitem SET quantity=quantity+? WHERE item_num=?";
+				pstmt2 = conn.prepareStatement(sql);
+				for (int i=0; i<detailList.size(); i++) {
+					OrderDetailVO detail = detailList.get(i);
+					pstmt2.setInt(1, detail.getOrder_quantity());
+					pstmt2.setInt(2, detail.getItem_num());
+					pstmt2.addBatch();
+					
+					if (i%1000==0) {
+						pstmt2.executeBatch();
+					}
+				} //end of for
+				
+				pstmt2.executeBatch();
+				
+			} //end of if
+			
+			conn.commit();
+		} catch (Exception e) {
+			conn.rollback();
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
 	// 사용자 - 주문 취소
 	public void updateOrderCancel(int order_num) throws Exception {
 		Connection conn = null;
