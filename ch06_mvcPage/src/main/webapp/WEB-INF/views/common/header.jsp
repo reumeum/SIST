@@ -18,6 +18,9 @@
 			<li><a
 				href="${pageContext.request.contextPath}/item/adminWriteForm.do">상품관리</a>
 			</li>
+			<li><a
+				href="${pageContext.request.contextPath}/order/adminList.do">주문관리</a>
+			</li>
 		</c:if> 
 		<c:if test="${!empty user_num}">
 			<li><a
