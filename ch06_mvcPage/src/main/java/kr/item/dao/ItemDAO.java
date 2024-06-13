@@ -47,8 +47,121 @@ public class ItemDAO {
 	}
 	
 	//관리자 - 상품 수정
+	public void updateItem(ItemVO item) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		String sub_sql = "";
+		int cnt = 0;
+		
+		try {
+			conn = DBUtil.getConnection();
+			if (item.getPhoto1()!=null && !"".equals(item.getPhoto1())) {
+				sub_sql += ",photo1=?";
+			}
+			if (item.getPhoto2()!=null && !"".equals(item.getPhoto2())) {
+				sub_sql += ",photo2=?";
+			}
+			
+			sql = "UPDATE zitem SET name=?,price=?,quantity=?,detail=?,modify_date=SYSDATE,status=?"
+					+ sub_sql + "WHERE item_num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(++cnt, item.getName());
+			pstmt.setInt(++cnt, item.getPrice());
+			pstmt.setInt(++cnt, item.getQuantity());
+			pstmt.setString(++cnt, item.getDetail());
+			pstmt.setInt(++cnt, item.getStatus());
+			if (item.getPhoto1() != null && !"".equals(item.getPhoto1())) {
+				pstmt.setString(++cnt, item.getPhoto1());
+			}
+			if (item.getPhoto2()!=null && !"".equals(item.getPhoto2())) {
+				pstmt.setString(++cnt, item.getPhoto2());
+			}
+			
+			pstmt.setInt(++cnt, item.getItem_num());
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, conn);
+		}
+	}
+	
 	//관리자 - 상품 삭제
-	//관리자/사용자 - 전체 상품 개수/검색 상품 개수
+	public void deleteItem(int item_num) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		String sql = null;
+		
+		try {
+			conn = DBUtil.getConnection();
+			conn.setAutoCommit(false);
+			
+			sql = "DELETE FROM zcart WHERE item_num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, item_num);
+			pstmt.executeUpdate();
+			
+			sql = "DELETE FROM zitem WHERE item_num=?";
+			pstmt2 = conn.prepareStatement(sql);
+			pstmt2.setInt(1, item_num);
+			pstmt2.executeUpdate();
+			
+			conn.commit();
+		} catch (Exception e) {
+			conn.rollback();
+			throw new Exception(e);
+		} finally {
+			DBUtil.executeClose(null, pstmt, null);
+			DBUtil.executeClose(null, pstmt2, conn);
+		}
+		
+	}
+	
+	public int getItemCount(String keyfield, String keyword, int status) throws Exception {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    int count = 0;
+	    String sql = null;
+	    String sub_sql = "";
+	    
+	    try {
+	        conn = DBUtil.getConnection();
+	        
+	        if (keyword != null && !"".equals(keyword)) {
+	            if (keyfield.equals("1")) sub_sql += "AND name LIKE '%' || ? || '%'";
+	            else if (keyfield.equals("2")) sub_sql += "AND detail LIKE '%' || ? || '%'";
+	        }
+	        
+	        sql = "SELECT COUNT(*) FROM zitem WHERE status > ? " + sub_sql;
+	        
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, status);
+	        if (keyword != null && !"".equals(keyword)) {
+	            pstmt.setString(2, keyword);
+	        }
+	        
+	        rs = pstmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            count = rs.getInt(1);
+	        }
+	    } catch (Exception e) {
+	        throw new Exception(e); 
+	    } finally {
+	        DBUtil.executeClose(rs, pstmt, conn);
+	    }
+	    
+	    return count;
+	}
+
+	
 	//관리자/사용자 - 전체 상품 목록/검색 상품 목록
 	public List<ItemVO> getListItem(int start, int end, String keyfield, String keyword, int status) throws Exception {
 		Connection conn = null;
@@ -128,6 +241,7 @@ public class ItemDAO {
 				item.setName(rs.getString("name"));
 				item.setPrice(rs.getInt("price"));
 				item.setQuantity(rs.getInt("quantity"));
+				item.setPhoto1(rs.getString("photo1"));
 				item.setPhoto2(rs.getString("photo2"));
 				item.setDetail(rs.getString("detail"));
 				item.setReg_date(rs.getDate("reg_date"));

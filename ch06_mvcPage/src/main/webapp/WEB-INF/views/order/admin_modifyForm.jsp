@@ -7,35 +7,35 @@
 <meta charset="UTF-8">
 <title>배송지정보 수정</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
-<c:if test="${order.status == 2}">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
-<script type="text/javascript">
-window.onload=function(){
-	//배송지정보 유효성 체크
-	const myForm = document.getElementById('order_modify');
-	myForm.onsubmit = function(){
-		const items = document.querySelectorAll('input[type="text"]');
-		for(let i=0;i<items.length;i++){
-			if(items[i].value.trim()==''){
-				const label = document.querySelector(
-						       'label[for="'+items[i].id+'"]');
-				alert(label.textContent + ' 항목은 필수 입력');
-				items[i].value = '';
-				items[i].focus();
-				return false;
-			}
-			
-			if(items[i].id == 'zipcode' 
-				&& !/^[0-9]{5}$/.test(items[i].value)){
-				alert('우편번호를 입력하세요(숫자5자리)');
-				items[i].value = '';
-				items[i].focus();
-				return false;
-			}
-		}//end of for	
+<c:if test="${order.status == 1}">
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript">
+	window.onload=function(){
+		//배송지정보 유효성 체크
+		const myForm = document.getElementById('order_modify');
+		myForm.onsubmit = function(){
+			const items = document.querySelectorAll('input[type="text"]');
+			for(let i=0;i<items.length;i++){
+				if(items[i].value.trim()==''){
+					const label = document.querySelector(
+							       'label[for="'+items[i].id+'"]');
+					alert(label.textContent + ' 항목은 필수 입력');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+				
+				if(items[i].id == 'zipcode' 
+					&& !/^[0-9]{5}$/.test(items[i].value)){
+					alert('우편번호를 입력하세요(숫자5자리)');
+					items[i].value = '';
+					items[i].focus();
+					return false;
+				}
+			}//end of for	
+		};
 	};
-};
-</script>
+	</script>
 </c:if>
 </head>
 <body>
@@ -49,7 +49,7 @@ window.onload=function(){
 		</div>
 		</c:if>
 		<c:if test="${order.status == 1}">	   
-			<form action="orderModify.do" method="post" id="order_modify">
+			<form action="modify.do" method="post" id="order_modify">
 				<input type="hidden" name="order_num" value="${order.order_num}">
 				<ul>
 					<li>
@@ -94,8 +94,8 @@ window.onload=function(){
 					<input type="submit" value="수정">
 					<input type="button" value="주문목록"
 					       onclick="location.href='orderList.do'">
-					<input type="button" value="MY페이지"
-					   onclick="location.href='${pageContext.request.contextPath}/member/myPage.do'">
+					<input type="button" value="주문목록"
+					   onclick="location.href='adminList.do'">
 				</div>
 			</form>
 <!-- 다음 우편번호 API 시작 -->
@@ -201,7 +201,6 @@ window.onload=function(){
 </div>	
 </body>
 </html>
-
 
 
 
