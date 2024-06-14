@@ -6,7 +6,10 @@ public class HomeController {
 	// 빈의 이름과 프로퍼티명이 일치하면 의존관계 설정
 	@Resource
 	private Camera camera1;
-	private Camera camera2;
+	// @Resource(name="빈 객체의 이름") 빈 객체의 이름 지정
+	@Resource(name="camera2")
+	private Camera camera2;	
+	@Resource(name="cameraz")
 	private Camera camera3;
 
 	public void setCamera1(Camera camera1) {
