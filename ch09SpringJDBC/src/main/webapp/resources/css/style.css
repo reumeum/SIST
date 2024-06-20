@@ -49,7 +49,9 @@ label{
 	float:left; /*태그를 왼쪽으로 정렬*/
 }
 
-
+.error-color {
+	color: red;
+}
 
 
 

@@ -5,15 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글쓰기</title>
+<title>글 수정</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css">
 </head>
 <body>
 	<div class="page-main">
-		<h2>글쓰기</h2>
-		<form:form action="insert.do" modelAttribute="boardVO">
+		<h2>글 수정</h2>
+		<form:form action="update.do" modelAttribute="boardVO">
+			<form:hidden path="num"/>
 			<ul>
 				<li>
 					<form:label path="writer">작성자</form:label>
@@ -37,7 +38,7 @@
 				</li>
 			</ul>
 			<div class="align-center">
-				<form:button>등록</form:button>
+				<form:button>수정</form:button>
 				<input type="button" value="목록" onclick="location.href='list.do'">
 			</div>
 		</form:form>
