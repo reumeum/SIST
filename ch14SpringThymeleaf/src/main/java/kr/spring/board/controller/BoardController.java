@@ -108,7 +108,7 @@ public class BoardController {
 		model.addAttribute("boardVO", 
 				boardService.getBoard(num));
 		
-		return "updateForm";
+		return "views/updateForm";
 	}
 	//전송된 데이터 처리
 	@PostMapping("/update.do")
@@ -118,7 +118,7 @@ public class BoardController {
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			return "updateForm";
+			return "views/updateForm";
 		}
 		
 		//비밀번호 일치 여부 체크
@@ -128,7 +128,7 @@ public class BoardController {
 		//비밀번호 체크
 		if(!db_board.getPasswd().equals(vo.getPasswd())) {
 			result.rejectValue("passwd", "invalidPassword");
-			return "updateForm";
+			return "views/updateForm";
 		}
 		
 		//글 수정
@@ -139,7 +139,7 @@ public class BoardController {
 	//글 삭제 폼 호출
 	@GetMapping("/delete.do")
 	public String formDelete(BoardVO vo) {
-		return "deleteForm";
+		return "views/deleteForm";
 	}
 	//글 삭제 처리
 	@PostMapping("/delete.do")
@@ -150,7 +150,7 @@ public class BoardController {
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		//비밀번호 전송 여부만 체크
 		if(result.hasFieldErrors("passwd")) {
-			return "deleteForm";
+			return "views/deleteForm";
 		}
 		//비밀번호 일치 여부 체크
 		//DB에 저장된 비밀번호 구하기
@@ -159,7 +159,7 @@ public class BoardController {
 		//비밀번호 체크
 		if(!db_board.getPasswd().equals(vo.getPasswd())) {
 			result.rejectValue("passwd", "invalidPassword");
-			return "deleteForm";
+			return "views/deleteForm";
 		}
 		//글 삭제
 		boardService.deleteBoard(vo.getNum());

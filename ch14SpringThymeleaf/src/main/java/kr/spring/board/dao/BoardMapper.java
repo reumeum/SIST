@@ -3,8 +3,10 @@ package kr.spring.board.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.board.vo.BoardVO;
 
@@ -16,6 +18,8 @@ public interface BoardMapper {
 	public List<BoardVO> getBoardList(Map<String, Integer> map);
 	@Select("SELECT * FROM aboard WHERE num=#{num}")
 	public BoardVO getBoard(int num);
+	@Update("UPDATE aboard SET writer=#{writer},title=#{title},content=#{content} WHERE num=#{num}")
 	public void updateBoard(BoardVO board);
+	@Delete("DELETE aboard WHERE num=#{num}")
 	public void deleteBoard(int num);
 }
