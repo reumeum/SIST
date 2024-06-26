@@ -3,6 +3,7 @@ package kr.spring.member.dao;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.member.vo.MemberVO;
 
@@ -22,6 +23,7 @@ public interface MemberMapper {
 	@Select("SELECT * FROM spmember JOIN spmember_detail USING(mem_num) WHERE mem_num=#{mem_num}")
 	public MemberVO selectMember(Long mem_num);
 
+	@Update("UPDATE spmember SET nick_name=#{nick_name} WHERE mem_num=#{mem_num}")
 	public void updateMember(MemberVO member);
 
 	public void updateMember_detail(MemberVO member);
