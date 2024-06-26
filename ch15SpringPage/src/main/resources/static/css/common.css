@@ -60,6 +60,10 @@ a:hover {
 	align-items: center; /*세로 정렬*/
 	justify-content: center; /*가로 정렬*/
 }
+
+.error-color {
+	color: #ff0000;
+}
 /* 공통 정렬
 ---------------------*/
 .align-center {

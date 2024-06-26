@@ -28,14 +28,14 @@
 
 /* 로그인
 ---------------------*/
-#login_form {
-	width: 300px;
+#member_login {
+	width: 320px;
 	margin: 0 auto;
 	padding: 0;
 	border: none;
 }
 
-#login_form ul {
+#member_login ul {
 	padding: 0;
 }
 
@@ -72,6 +72,16 @@
 	opacity: 0.65;
 	transform: scale(0.85) translateY(-0.5rem) translateX(-0.5rem);
 }
+
+#member_login .login-btn {
+	width: 320px;
+}
+
+#member_login label[for="auto"] {
+	width: 200px;
+	padding: 0 0 5px 0;
+}
+
 /* MY페이지
 ---------------------*/
 .mypage-div {
