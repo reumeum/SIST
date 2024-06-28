@@ -15,7 +15,7 @@
 				<form:errors path="now_passwd" cssClass="error-color" />
 			</li>
 			<li>
-				<form:label path="passwd">비밀번호</form:label>
+				<form:label path="passwd">새 비밀번호</form:label>
 				<form:password path="passwd" />
 				<form:errors path="passwd" cssClass="error-color" />
 			</li>
@@ -49,7 +49,7 @@
 			<li>
 				<form:label path="captcha_chars">캡챠 문자 확인</form:label>
 				<form:input path="captcha_chars" />
-				<form:errors path="captcha_chars" cssClass="error_color" />
+				<form:errors path="captcha_chars" cssClass="error-color" />
 			</li>
 		</ul>
 		<div class="align-center">
@@ -57,6 +57,7 @@
 			<input type="button" value="MY페이지" onclick="location.href='myPage'">
 		</div>
 	</form:form>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/member.password.js"></script>
 	<p class="align-center">
 		<input type="button" value="홈으로" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/main/main'">
 		<input type="button" value="비밀번호찾기" class="default-btn" onclick="location.href='sendPassword'">

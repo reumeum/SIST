@@ -26,7 +26,11 @@ public class AppConfig implements WebMvcConfigurer {
 		registry.addInterceptor(loginCheck)
 				.addPathPatterns("/member/myPage")
 				.addPathPatterns("/member/update")
-				.addPathPatterns("/member/changePassword");
+				.addPathPatterns("/member/changePassword")
+				.addPathPatterns("/member/delete")
+				.addPathPatterns("/board/write")
+				.addPathPatterns("/board/update")
+				.addPathPatterns("/board/delete");
 	}
 	
 	@Bean
@@ -34,7 +38,7 @@ public class AppConfig implements WebMvcConfigurer {
 		final TilesConfigurer configurer = new TilesConfigurer();
 		//xml 설정 파일 경로 지정
 		configurer.setDefinitions(new String[] {
-				"/WEB-INF/tiles-def/main.xml", "/WEB-INF/tiles-def/member.xml"
+				"/WEB-INF/tiles-def/main.xml", "/WEB-INF/tiles-def/member.xml", "/WEB-INF/tiles-def/board.xml"
 		});
 		configurer.setCheckRefresh(true);
 		return configurer;
