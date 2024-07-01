@@ -221,6 +221,16 @@ public class MemberController {
 		return "imageView"; // 컨테이너에 저장된 클래스명
 	}
 
+	// 프로필 사진 출력(회원번호 지정)
+	@GetMapping("/member/viewProfile")
+	public String getProfileByMem_num(long mem_num, HttpServletRequest request, Model model) {
+		MemberVO memberVO = memberService.selectMember(mem_num);
+		
+		viewProfile(memberVO,request,model);
+		
+		return "imageView";
+	}
+
 	// 프로필 사진 처리를 위한 공통 코드
 	public void viewProfile(MemberVO memberVO, HttpServletRequest request, Model model) {
 		if (memberVO == null || memberVO.getPhoto_name() == null) {
@@ -304,8 +314,8 @@ public class MemberController {
 
 		// TODO 설정되어 있는 자동로그인 기능 해제 (모든 브라우저에 설정된 자동로그인 해제)
 		memberService.deleteAu_id(memberVO.getMem_num());
-		
-		//View에 표시할 메시지
+
+		// View에 표시할 메시지
 		model.addAttribute("message", "비밀번호 변경 완료(*재접속시 설정되어 있는 자동로그인 기능 해제*)");
 		model.addAttribute("url", request.getContextPath() + "/member/myPage");
 
