@@ -1,0 +1,2 @@
+String clientId = "PPJDiC3BNDi3uGhs0FV3";
+String clientSecret = "bVFWG1tBcn";

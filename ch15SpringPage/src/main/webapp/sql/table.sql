@@ -44,3 +44,11 @@ create table spboard(
 );
 
 create sequence spboard_seq;
+
+--게시판 좋아요
+CREATE TABLE spboard_fav(
+	board_num NUMBER NOT NULL,
+	mem_num NUMBER NOT NULL,
+	CONSTRAINT fav_spboard_fk1 FOREIGN KEY (board_num) REFERENCES spboard(board_num),
+	CONSTRAINT fav_spmember_fk2 FOREIGN KEY (mem_num) REFERENCES spmember(mem_num)
+);
