@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.board.vo.BoardFavVO;
+import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.board.vo.BoardVO;
 
 @Mapper
@@ -41,6 +42,17 @@ public interface BoardMapper {
 	public void deleteFavByBoardNum(Long board_num);
 
 	// 댓글
+	public List<BoardReplyVO> selectListReply(Map<String, Object> map);
+	@Select("SELECT COUNT(*) FROM spboard_reply WHERE board_num=#{board_num}")
+	public Integer selectRowCountReply(Map<String, Object> map); //여기 왜 파라미터가 map으로 들어가지?
+	public BoardReplyVO selectReply(Long re_num);
+	public void insertReply(BoardReplyVO boardReply);
+	public void updateReply(BoardReplyVO boardReply);
+	public void deleteReply(Long re_num);
+	//부모글 삭제시 댓글이 존재하면 부모글 삭제전 댓글 삭제
+	public void deleteReplyByBoardNum(Long board_num);
+	//부모글 삭제시 댓글의 답글이 존재하면 댓글 번호를 구해서 답글 삭제시 사용
+	public List<Long> selectReNumsByBoard_num(Long board_num);
 
 	// 댓글 좋아요
 

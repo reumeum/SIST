@@ -52,3 +52,18 @@ CREATE TABLE spboard_fav(
 	CONSTRAINT fav_spboard_fk1 FOREIGN KEY (board_num) REFERENCES spboard(board_num),
 	CONSTRAINT fav_spmember_fk2 FOREIGN KEY (mem_num) REFERENCES spmember(mem_num)
 );
+
+--댓글
+CREATE TABLE spboard_reply(
+	re_num NUMBER NOT NULL,
+	re_content VARCHAR2(900) NOT NULL,
+	re_date DATE DEFAULT SYSDATE NOT NULL,
+	re_mdate DATE,
+	re_ip VARCHAR2(40) NOT NULL,
+	board_num NUMBER NOT NULL,
+	mem_num NUMBER NOT NULL,
+	CONSTRAINT spboard_reply_pk PRIMARY KEY (re_num),
+	CONSTRAINT reply_spboard_fk1 FOREIGN KEY (board_num) REFERENCES spboard (board_num),
+	CONSTRAINT reply_spmember_fk2 FOREIGN KEY (mem_num) REFERENCES spmember (mem_num)
+);
+CREATE SEQUENCE spreply_seq;

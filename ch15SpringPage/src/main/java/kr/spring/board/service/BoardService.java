@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.board.vo.BoardFavVO;
+import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.board.vo.BoardVO;
 
 public interface BoardService {
@@ -22,4 +23,12 @@ public interface BoardService {
 	public Integer selectFavCount(Long board_num);
 	public void insertFav(BoardFavVO fav);
 	public void deleteFav(BoardFavVO fav);
+	
+	// 댓글
+	public List<BoardReplyVO> selectListReply(Map<String, Object> map);
+	public Integer selectRowCountReply(Map<String, Object> map); //여기 왜 파라미터가 map으로 들어가지?
+	public BoardReplyVO selectReply(Long re_num);
+	public void insertReply(BoardReplyVO boardReply);
+	public void updateReply(BoardReplyVO boardReply);
+	public void deleteReply(Long re_num);
 }
