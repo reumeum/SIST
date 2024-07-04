@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.board.dao.BoardMapper;
 import kr.spring.board.vo.BoardFavVO;
+import kr.spring.board.vo.BoardReFavVO;
 import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.board.vo.BoardVO;
 
@@ -54,6 +55,7 @@ public class BoardServiceImpl implements BoardService {
 	public void deleteBoard(Long board_num) {
 		// 답글 삭제
 		// 댓글 좋아요 삭제
+		boardMapper.deleteReFavByBoardNum(board_num);
 		// 댓글 삭제
 		boardMapper.deleteReplyByBoardNum(board_num);
 		// 부모글 좋아요 삭제
@@ -96,13 +98,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Integer selectRowCountReply(Map<String, Object> map) {
-		return boardMapper.selectRowCount(map);
+		return boardMapper.selectRowCountReply(map);
 	}
 
 	@Override
 	public BoardReplyVO selectReply(Long re_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardMapper.selectReply(re_num);
 	}
 
 	@Override
@@ -112,12 +113,36 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void updateReply(BoardReplyVO boardReply) {
+		boardMapper.updateReply(boardReply);
+	}
+
+	@Override
+	public void deleteReply(Long re_num) {
+		//답글
+		
+		//댓글 좋아요
+		boardMapper.deleteReFavByReNum(re_num);
+		boardMapper.deleteReply(re_num);
+	}
+
+	@Override
+	public BoardReFavVO selectReFav(BoardReFavVO fav) {
+		return boardMapper.selectReFav(fav);
+	}
+
+	@Override
+	public Integer selectReFavCount(Long re_num) {
+		return boardMapper.selectReFavCount(re_num);
+	}
+
+	@Override
+	public void insertReFav(BoardReFavVO fav) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteReply(Long re_num) {
+	public void deleteReFav(BoardReFavVO fav) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -67,3 +67,11 @@ CREATE TABLE spboard_reply(
 	CONSTRAINT reply_spmember_fk2 FOREIGN KEY (mem_num) REFERENCES spmember (mem_num)
 );
 CREATE SEQUENCE spreply_seq;
+
+--댓글 좋아요
+CREATE TABLE spreply_fav(
+	re_num NUMBER NOT NULL,
+	mem_num NUMBER NOT NULL,
+	CONSTRAINT refav_fk1 FOREIGN KEY (re_num) REFERENCES spboard_reply (re_num),
+	CONSTRAINT refav_fk2 FOREIGN KEY (mem_num) REFERENCES spmember (mem_num)
+);

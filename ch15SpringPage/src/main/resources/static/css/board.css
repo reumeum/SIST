@@ -129,7 +129,7 @@ div#loading {
 	cursor: pointer;
 }
 
-.modify-btn:hoverm .delete-btn:hover {
+.modify-btn:hover, .delete-btn:hover {
 	background-color: #e1e3e2;
 	color: #000000;
 	transition: 0.2e ease-out;
@@ -147,6 +147,9 @@ div#output {
 form#mre_form {
 	border: none;
 	margin: 5px;
+}
+div.item {
+	margin-top: 20px;
 }
 /* 게시판 글 수정
 ---------------------*/
