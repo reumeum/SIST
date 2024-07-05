@@ -137,14 +137,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void insertReFav(BoardReFavVO fav) {
-		// TODO Auto-generated method stub
-		
+		boardMapper.insertReFav(fav);
 	}
 
 	@Override
 	public void deleteReFav(BoardReFavVO fav) {
-		// TODO Auto-generated method stub
-		
+		boardMapper.deleteReFav(fav);
 	}
 
 }
