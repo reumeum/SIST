@@ -75,3 +75,21 @@ CREATE TABLE spreply_fav(
 	CONSTRAINT refav_fk1 FOREIGN KEY (re_num) REFERENCES spboard_reply (re_num),
 	CONSTRAINT refav_fk2 FOREIGN KEY (mem_num) REFERENCES spmember (mem_num)
 );
+
+--답글
+CREATE TABLE spboard_response(
+	te_num NUMBER NOT NULL,
+	te_content VARCHAR2(900) NOT NULL,
+	te_date DATE DEFAULT SYSDATE NOT NULL,
+	te_mdate DATE,
+	te_parent_num NUMBER NOT NULL, --부모글의 번호가 들어감, 자식글이 아니라 부모글일 경우 0 (외래키 제약조건 못줌)
+	te_depth NUMBER NOT NULL, --자식글의 깊이. 부모글의 자식글A 1, 자식글A의 자식글B 2, 부모글일 경우 0
+	te_ip VARCHAR2(40) NOT NULL,
+	re_num NUMBER NOT NULL,
+	mem_num NUMBER NOT NULL,
+	CONSTRAINT spboard_treply_pk PRIMARY KEY (te_num),
+	CONSTRAINT treply_reply_fk1 FOREIGN KEY (re_num) REFERENCES spboard_reply (re_num),
+	CONSTRAINT treply_spmember_fk2 FOREIGN KEY (mem_num) REFERENCES spmember (mem_num)
+);
+
+CREATE SEQUENCE response_seq;

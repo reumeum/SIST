@@ -18,6 +18,7 @@ import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardFavVO;
 import kr.spring.board.vo.BoardReFavVO;
 import kr.spring.board.vo.BoardReplyVO;
+import kr.spring.board.vo.BoardResponseVO;
 import kr.spring.board.vo.BoardVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
@@ -293,4 +294,53 @@ public class BoardAjaxController {
 		
 		return mapJson;
 	}
+	
+	/*===================================
+	 *  답글 등록
+	 ==================================*/
+	@PostMapping("/board/writeResponse")
+	@ResponseBody
+	public Map<String, String> writeResponse(BoardResponseVO boardResponseVO,
+											HttpSession session,
+											HttpServletRequest request) {
+		Map<String, String> mapJson = new HashMap<String, String>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if (user == null) {
+			//로그인이 되지 않은 경우
+			mapJson.put("result", "logout");
+		} else {
+			//로그인 된 경우
+			//회원번호 저장
+			boardResponseVO.setMem_num(user.getMem_num());
+			//ip 저장
+			boardResponseVO.setTe_ip(request.getRemoteAddr());
+			//답글 등록
+			boardService.insertResponse(boardResponseVO);
+			mapJson.put("result", "success");
+		}
+		
+		return mapJson;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
