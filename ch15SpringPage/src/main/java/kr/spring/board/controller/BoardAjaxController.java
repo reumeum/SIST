@@ -205,20 +205,19 @@ public class BoardAjaxController {
 	 ==================================*/
 	@PostMapping("/board/updateReply")
 	@ResponseBody
-	public Map<String, String> modifyReply(BoardReplyVO boardReplyVO, 
-										   HttpSession session, HttpServletRequest request) {
+	public Map<String, String> modifyReply(BoardReplyVO boardReplyVO, HttpSession session, HttpServletRequest request) {
 		log.debug("<<댓글 수정>> : " + boardReplyVO);
-		
+
 		Map<String, String> mapJson = new HashMap<String, String>();
 		MemberVO user = (MemberVO) session.getAttribute("user");
-		
+
 		BoardReplyVO db_reply = boardService.selectReply(boardReplyVO.getRe_num());
-		
+
 		if (user == null) { //로그인이 되지 않은 경우
 			mapJson.put("result", "logout");
-		} else if (user!=null && user.getMem_num() == db_reply.getMem_num()) {
+		} else if (user != null && user.getMem_num() == db_reply.getMem_num()) {
 			//로그인 회원번호와 작성자 회원번호 일치
-			
+
 			//ip 저장
 			boardReplyVO.setRe_ip(request.getRemoteAddr());
 			//댓글 수정
@@ -228,10 +227,10 @@ public class BoardAjaxController {
 			//로그인 회원번호와 작성자 회원번호 불일치
 			mapJson.put("result", "wrongAccess");
 		}
-		
+
 		return mapJson;
 	}
-	
+
 	/*===================================
 	 *  댓글 삭제
 	 ==================================*/
@@ -239,17 +238,17 @@ public class BoardAjaxController {
 	@ResponseBody
 	public Map<String, String> deleteReply(long re_num, HttpSession session) {
 		log.debug("<<댓글 삭제 - re_num>> : " + re_num);
-		
+
 		Map<String, String> mapJson = new HashMap<String, String>();
-		
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		
+
+		MemberVO user = (MemberVO) session.getAttribute("user");
+
 		BoardReplyVO db_reply = boardService.selectReply(re_num);
-		
+
 		if (user == null) {
 			//로그인이 되지 않은 경우
 			mapJson.put("result", "logout");
-		} else if (user!=null && user.getMem_num() == db_reply.getMem_num()) {
+		} else if (user != null && user.getMem_num() == db_reply.getMem_num()) {
 			//로그인한 회원 번호와 작성자 회원번호 일치
 			boardService.deleteReply(re_num);
 			mapJson.put("result", "success");
@@ -257,11 +256,10 @@ public class BoardAjaxController {
 			//로그인한 회원 번호와 작성자 회원번호 일치
 			mapJson.put("result", "wrongAccess");
 		}
-			
-		
+
 		return mapJson;
 	}
-	
+
 	/*===================================
 	 *  댓글 좋아요 등록/삭제
 	 ==================================*/
@@ -269,18 +267,18 @@ public class BoardAjaxController {
 	@ResponseBody
 	public Map<String, Object> getReFav(BoardReFavVO fav, HttpSession session) {
 		log.debug("<<댓글 좋아요 등록/삭제>> : " + fav);
-		
+
 		Map<String, Object> mapJson = new HashMap<String, Object>();
-		
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		
+
+		MemberVO user = (MemberVO) session.getAttribute("user");
+
 		if (user == null) {
 			mapJson.put("result", "logout");
 		} else {
 			fav.setMem_num(user.getMem_num());
 			BoardReFavVO boardReFav = boardService.selectReFav(fav);
-			
-			if (boardReFav  != null) {
+
+			if (boardReFav != null) {
 				boardService.deleteReFav(fav);
 				mapJson.put("status", "noFav");
 			} else {
@@ -290,21 +288,19 @@ public class BoardAjaxController {
 			mapJson.put("result", "success");
 			mapJson.put("count", boardService.selectReFavCount(fav.getRe_num()));
 		}
-		
-		
+
 		return mapJson;
 	}
-	
+
 	/*===================================
 	 *  답글 등록
 	 ==================================*/
 	@PostMapping("/board/writeResponse")
 	@ResponseBody
-	public Map<String, String> writeResponse(BoardResponseVO boardResponseVO,
-											HttpSession session,
-											HttpServletRequest request) {
+	public Map<String, String> writeResponse(BoardResponseVO boardResponseVO, HttpSession session,
+			HttpServletRequest request) {
 		Map<String, String> mapJson = new HashMap<String, String>();
-		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		if (user == null) {
 			//로그인이 되지 않은 경우
 			mapJson.put("result", "logout");
@@ -318,10 +314,10 @@ public class BoardAjaxController {
 			boardService.insertResponse(boardResponseVO);
 			mapJson.put("result", "success");
 		}
-		
+
 		return mapJson;
 	}
-	
+
 	/*===================================
 	 *  답글 목록
 	 ==================================*/
@@ -329,39 +325,79 @@ public class BoardAjaxController {
 	@ResponseBody
 	public Map<String, Object> getListResp(long re_num, HttpSession session) {
 		log.debug("<<답글 목록 - re_num>> : " + re_num);
-		
+
 		List<BoardResponseVO> list = boardService.selectListResponse(re_num);
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		
+		MemberVO user = (MemberVO) session.getAttribute("user");
+
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		mapJson.put("list", list);
-		
+
 		if (user != null) {
 			mapJson.put("user_num", user.getMem_num());
+		}
+
+		return mapJson;
+	}
+
+	/*===================================
+	 *  답글 수정
+	 ==================================*/
+	@PostMapping("/board/updateResponse")
+	@ResponseBody
+	public Map<String, String> modifyResponse(BoardResponseVO boardResponseVO, HttpSession session,
+			HttpServletRequest request) {
+		log.debug("<<답글 수정>> : " + boardResponseVO);
+		
+		Map<String, String> mapJson = new HashMap<String, String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		BoardResponseVO db_response = boardService.selectResponse(boardResponseVO.getTe_num());
+		
+		if (user==null) {
+			//로그인이 되지 않은 경우
+			mapJson.put("result", "logout");
+		} else if (user!=null && user.getMem_num()==db_response.getMem_num()) {
+			//로그인 회원번호와 작성자 회원번호 일치
+			//ip저장
+			boardResponseVO.setTe_ip(request.getRemoteAddr());
+			//답글 수정
+			boardService.updateResponse(boardResponseVO);
+			mapJson.put("result", "success");
+		} else {
+			//로그인한 회원번호와 작성자 회원번호 불일치
+			mapJson.put("result", "wrongAccess");
+		}
+		return mapJson;
+	}
+	
+	/*===================================
+	 *  답글 삭제
+	 ==================================*/
+	@PostMapping("/board/deleteResponse")
+	@ResponseBody
+	public Map<String, Object> deleteResponse(long te_num, int mem_num, HttpSession session) {
+		log.debug("<<댓글 삭제 - te_num >> : " + te_num);
+		log.debug("<<댓글 삭제 - mem_num >> : " + mem_num);
+		
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if (user==null) {
+			//로그인이 되지 않은 경우
+			mapJson.put("result", "logout");
+		} else if (user!=null && user.getMem_num()==mem_num) {
+			//로그인 회원번호와 작성자 회원번호 일치
+			BoardResponseVO response = boardService.selectResponse(te_num); //삭제하기 전에 부모인 re_num을 구하기 위해서
+			boardService.deleteResponse(te_num);
+			int cnt = boardService.selectResponseCount(response.getRe_num());
+			
+			log.debug("<<답글 삭제 후 나머지 답글 개수>> : " + cnt);
+			
+			mapJson.put("cnt", cnt);
+			mapJson.put("result", "success");
+		} else {
+			mapJson.put("result", "wrongAccess");
 		}
 		
 		return mapJson;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
