@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
@@ -45,6 +46,7 @@ public class TalkController {
 	
 	//채팅 회원 검색
 	@GetMapping("/talk/memberSearchAjax")
+	@ResponseBody
 	public Map<String, Object> memberSearchAjax(String id, HttpSession session) {
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		
