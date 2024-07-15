@@ -21,14 +21,12 @@ public class TalkServiceImpl implements TalkService {
 
 	@Override
 	public List<TalkRoomVO> selectTalkRoomList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return talkMapper.selectTalkRoomList(map);
 	}
 
 	@Override
 	public Integer selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return talkMapper.selectRowCount(map);
 	}
 
 	@Override
@@ -50,8 +48,7 @@ public class TalkServiceImpl implements TalkService {
 
 	@Override
 	public List<TalkMemberVO> selectTalkMember(Long talkroom_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return talkMapper.selectTalkMember(talkroom_num);
 	}
 
 	@Override
