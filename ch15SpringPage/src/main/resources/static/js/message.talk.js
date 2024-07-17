@@ -21,7 +21,25 @@ $(function() {
 	 *		웹소켓 연결
 	 *---------------------------*/
 	function connectWebSocket() {
-		
+		message_socket = new WebSocket("ws://localhost:8000/message-ws");
+		message_socket.onopen=function(evt) {
+			console.log('채팅페이지 접속 : ' + $('#talkDetail').length);
+			if ($('#talkDetail').length==1) {
+				message_socket.send('msg');
+			}
+		};
+		//서버로부터 메시지를 받으면 호출되는 함수 지정
+		message_socket.onmessage=function(evt) {
+			//메시지 읽기
+			let data = evt.data;
+			if ($('#talkDetail').length == 1 && data.substring(0,3)=='msg') {
+				selectMsg();
+			}
+		};
+		message_socket.onclose=function(evt) {
+			//소켓이 종료된 후 부과적인 작성이 있을 경우 명시
+			console.log("chat close");
+		}
 	}
 	
 	/*----------------------------
@@ -198,12 +216,12 @@ $(function() {
 					});	
 				}else{
 					alert('채팅 메시지 읽기 오류 발생');	
-					//message_socket.close();
+					message_socket.close();
 				}
 			},
 			error:function(){
 				alert('네트워크 오류 발생');
-				//message_socket.close();
+				message_socket.close();
 			}
 		});	
 	}
@@ -227,6 +245,7 @@ $(function() {
 			alert('메시지를 1333자까지만 입력 가능합니다');
 			return false;
 		}
+		event.preventDefault();
 		
 		//입력한 데이터 읽기
 		let form_data = $(this).serialize();
@@ -242,7 +261,7 @@ $(function() {
 				} else if (param.result == 'success') {
 					//폼 초기화
 					$('#message').val('').focus();
-					selectMsg();
+					message_socket.send('msg');
 				} else {
 					alert('채팅 메시지 등록 오류 발생');
 				}
@@ -251,9 +270,6 @@ $(function() {
 				alert('네트워크 오류 발생');
 			}
 		});
-		event.preventDefault();
 	});
-	
-	//초기데이터 호출
-	selectMsg();
+
 });

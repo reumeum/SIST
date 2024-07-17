@@ -38,11 +38,14 @@ public interface MemberMapper {
 	public void deleteMember_detail(Long mem_num);
 
 	// 자동 로그인
+	@Update("UPDATE spmember_detail SET au_id=#{au_id} WHERE mem_num=#{mem_num}")
 	public void updateAu_id(String au_id, Long mem_num);
 
-	public void selectAu_id(String au_id);
+	@Select("SELECT m.mem_num,m.id,m.auth,d.au_id,d.passwd,m.nick_name,d.email FROM spmember m JOIN spmember_detail d ON m.mem_num=d.mem_num WHERE d.au_id=#{au_id}")
+	public MemberVO selectAu_id(String au_id);
 
-	public void deleteAu_id(Long mem_num);
+	@Update("UPDATE spmember_detail au_id='' WHERE mem_num=#{mem_num}")
+	public void deleteAu_id(Long mem_num); //비밀번호 변경시 au_id 무력화
 
 	// 비밀번호 찾기
 	public void updateRandomPassword(MemberVO member);
@@ -50,9 +53,9 @@ public interface MemberMapper {
 	// 프로필 이미지 업데이트
 	@Update("UPDATE spmember_detail SET photo=#{photo}, photo_name=#{photo_name} WHERE mem_num=${mem_num}")
 	public void updateProfile(MemberVO member);
-	
+
 	// 채팅 회원 정보 검색
 	@Select("SELECT mem_num,id,nick_name FROM spmember WHERE auth>=2 AND id LIKE '%' || #{id} || '%'")
 	public List<MemberVO> selectSearchMember(String id);
-	
+
 }
