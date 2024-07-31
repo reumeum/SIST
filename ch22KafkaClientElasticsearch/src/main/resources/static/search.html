@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>엘라스틱 서치에 저장된 데이터 확인하기</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	function selectList(){
+		$.ajax({
+			url:'/elastic/search',
+			dataType:'json',
+			success:function(param){
+				//table의 내부 내용물 제거(초기화)
+				$('#output').empty();
+				
+				$(param.hits.hits).each(function(index,item){
+					let output = '';
+					output += '<tr>';
+					output += '<td>' + new Date(JSON.parse(item._source.message).timestamp).toLocaleString() + '</td>';
+					output += '<td>' + JSON.parse(item._source.message).userName + '</td>';
+					output += '<td>' + JSON.parse(item._source.message).colorName + '</td>';
+					
+					$('#output').append(output);
+				});
+			},
+			error:function(){
+				alert('네트워크 오류 발생!');
+			}
+		});
+	}
+	selectList();
+});
+</script>
+</head>
+<body>
+	<table id="output" border="1"></table>
+</body>
+</html>
